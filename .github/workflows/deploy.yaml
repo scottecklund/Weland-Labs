@@ -29,12 +29,11 @@ jobs:
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
           local-dir: ./
           dangerous-clean-slate: false
-          exclude: |
-            **/.git*
-            **/.git*/**
-            .github/**
-            scraps/**
-            screenshots/**
-            uploads/**
-            README.md
-            *.jsx
+        exclude: |
+          **/.git*
+          **/.git*/**
+          .github/**
+          scraps/**
+          screenshots/**
+          uploads/**
+          README.md
