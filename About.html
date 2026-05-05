@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Weland Labs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="interior.css?v=9">
+<style>
+  .about-intro { padding: 72px 0 32px; }
+  .about-intro .grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: start; }
+  .about-intro h2 { font-size: calc(34px * var(--text-scale, 1)); font-weight: 600; color: var(--navy); letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 8px; }
+  .about-intro p { color: var(--muted); font-size: calc(15.5px * var(--text-scale, 1)); line-height: 1.7; margin: 0 0 16px; }
+  .stat-grid { padding: 56px 0; background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .stat-grid .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; }
+  .stat-grid .stat { padding: 0 32px; border-left: 1px solid var(--border); }
+  .stat-grid .stat:first-child { border-left: 0; padding-left: 0; }
+  .stat-grid .num { font-size: calc(48px * var(--text-scale, 1)); font-weight: 700; color: var(--navy); letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; }
+  .stat-grid .num span { color: var(--cyan); }
+  .stat-grid .lbl { font-size: calc(13px * var(--text-scale, 1)); color: var(--muted); line-height: 1.5; }
+
+  .timeline { padding: 80px 0; }
+  .timeline h2 { font-size: calc(30px * var(--text-scale, 1)); color: var(--navy); font-weight: 700; margin: 0 0 8px; letter-spacing: -0.015em; }
+  .timeline .lede { color: var(--muted); font-size: calc(15px * var(--text-scale, 1)); max-width: 640px; margin: 0 0 48px; line-height: 1.6; }
+  .tl-list { position: relative; padding-left: 32px; border-left: 1px solid var(--border); }
+  .tl-row { display: grid; grid-template-columns: 120px 1fr; gap: 32px; padding: 22px 0; border-top: 1px solid var(--border); align-items: start; position: relative; }
+  .tl-row:first-child { border-top: 0; }
+  .tl-row::before { content: ""; position: absolute; left: -37px; top: 30px; width: 11px; height: 11px; background: var(--white); border: 2px solid var(--cyan); border-radius: 50%; }
+  .tl-year { font-family: ui-monospace, monospace; font-size: calc(14px * var(--text-scale, 1)); color: var(--cyan); font-weight: 700; letter-spacing: 0.04em; padding-top: 2px; }
+  .tl-text h3 { margin: 0 0 6px; font-size: calc(17px * var(--text-scale, 1)); color: var(--navy); font-weight: 700; }
+  .tl-text p { margin: 0; color: var(--muted); font-size: calc(14px * var(--text-scale, 1)); line-height: 1.65; }
+
+  .values { padding: 72px 0; background: var(--white); border-top: 1px solid var(--border); }
+  .values .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 36px; }
+  .value-card { padding: 28px 28px 32px; border: 1px solid var(--border); }
+  .value-card .num { font-family: ui-monospace, monospace; font-size: calc(11px * var(--text-scale, 1)); color: var(--cyan); letter-spacing: 0.1em; }
+  .value-card h3 { font-size: calc(20px * var(--text-scale, 1)); color: var(--navy); font-weight: 700; margin: 8px 0 10px; letter-spacing: -0.01em; }
+  .value-card p { font-size: calc(14px * var(--text-scale, 1)); color: var(--muted); line-height: 1.65; margin: 0; }
+
+  .leadership { padding: 80px 0; }
+  .leadership .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 36px; }
+  .leader { }
+  .leader .photo {
+    aspect-ratio: 4/5;
+    background: linear-gradient(135deg, #d8e4ec, #b9c9d4);
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .leader .photo::after {
+    content: "[ portrait ]";
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(5,41,66,0.4);
+    font-family: ui-monospace, monospace;
+    font-size: calc(11px * var(--text-scale, 1));
+    background-image: repeating-linear-gradient(45deg, rgba(5,41,66,0.04) 0 2px, transparent 2px 14px);
+  }
+  .leader h4 { margin: 0 0 4px; font-size: calc(16px * var(--text-scale, 1)); color: var(--navy); font-weight: 700; }
+  .leader .role { font-size: calc(13px * var(--text-scale, 1)); color: var(--cyan); margin-bottom: 8px; font-weight: 600; }
+  .leader .bio { font-size: calc(13px * var(--text-scale, 1)); color: var(--muted); line-height: 1.55; margin: 0; }
+
+  @media (max-width: 860px) {
+    .about-intro .grid { grid-template-columns: 1fr; gap: 24px; }
+    .stat-grid .grid { grid-template-columns: repeat(2, 1fr); gap: 24px 0; }
+    .stat-grid .stat:nth-child(3) { border-left: 0; padding-left: 0; }
+    .values .grid { grid-template-columns: 1fr; }
+    .leadership .grid { grid-template-columns: repeat(2, 1fr); }
+    .tl-row { grid-template-columns: 80px 1fr; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="interior-shell.jsx"></script>
+<script type="text/babel">
+
+const timeline = [
+  { year: "1972", title: "Founded in Cedar Rapids", desc: "Dr. Mark Weland opens a single-room clinical lab serving three local family practices." },
+  { year: "1984", title: "First reference partnership", desc: "Begins handling overflow chemistry and hematology for St. Luke's Hospital." },
+  { year: "1996", title: "Czech Square location opens", desc: "Second draw site opens to serve southwest Cedar Rapids residents." },
+  { year: "2008", title: "CAP accreditation", desc: "Earns College of American Pathologists accreditation, expanding into surgical pathology." },
+  { year: "2015", title: "EMR integration", desc: "HL7 result delivery rolled out across all major regional EMRs." },
+  { year: "2021", title: "Marion location opens", desc: "Fourth location opens, bringing total daily capacity to 600+ patients." },
+  { year: "Today", title: "50+ years and counting", desc: "Now performing 1,200+ assays for 180+ provider partners across Eastern Iowa." },
+];
+
+const values = [
+  { num: "01", title: "Accuracy first", desc: "Every result is reviewed against quality controls before it leaves our lab. We'd rather take an extra hour than send out a result we're not sure about." },
+  { num: "02", title: "Patients are people", desc: "A blood draw is rarely the highlight of someone's day. We try to make it the easiest part — short waits, gentle sticks, and someone who'll explain what's happening." },
+  { num: "03", title: "Fast where it matters", desc: "Stat orders processed in 60 minutes. Routine results back same-day or next morning. Your provider shouldn't have to chase us." },
+];
+
+const leaders = [
+  { name: "Dr. Karen Holm", role: "Medical Director", bio: "Board-certified pathologist with 22 years at Weland Labs. Oversees clinical chemistry and surgical pathology." },
+  { name: "Tomás Reyes", role: "Chief Operating Officer", bio: "Joined in 2014. Built our reference-lab program from three to 180+ provider partners." },
+  { name: "Priya Anand, MT(ASCP)", role: "Lab Manager", bio: "Leads day-to-day operations across all four locations. Twelve years in clinical lab science." },
+  { name: "Dr. Henry Okafor", role: "Pathologist", bio: "Specializes in dermatopathology and GI biopsies. CAP-accredited and previously at Mayo." },
+];
+
+function App() {
+  return (
+    <>
+      <ShellNav current="about" />
+      <main>
+        <PageHero
+          crumbs={[{ label: "Home", href: "index.html" }, { label: "About Us" }]}
+          title="Fifty years of careful work."
+          lede="Eastern Iowa's privately-held diagnostic lab since 1972."
+          image="assets/about.jpg"
+          imageAlt="Weland Labs team"
+        />
+
+        <section className="about-intro">
+          <div className="container">
+            <div className="grid">
+              <div>
+                <p className="eyebrow" style={{color: "var(--cyan)"}}>Our practice</p>
+                <h2>Independent. Local. Accountable.</h2>
+              </div>
+              <div>
+                <p>We're not a national chain and we're not owned by a hospital system. That gives us room to do the work the way we think it should be done — answer the phone on the second ring, run quality controls every shift, and call your provider directly when something looks off.</p>
+                <p>Most of our staff have been here a decade or more. The lab director who reviews your specimen probably trained the technologist who drew it. The same person who orders our reagents knows your insurance plan. That continuity is the whole point.</p>
+                <p>We test about 600 patients a day across four locations. Behind every result is a real human running quality checks, signing reports, and answering questions when providers call back with follow-ups.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="stat-grid">
+          <div className="container">
+            <div className="grid">
+              <div className="stat"><div className="num">50<span>+</span></div><div className="lbl">Years serving Eastern Iowa</div></div>
+              <div className="stat"><div className="num">1,200<span>+</span></div><div className="lbl">Validated assays in our catalog</div></div>
+              <div className="stat"><div className="num">180<span>+</span></div><div className="lbl">Clinic and hospital partners</div></div>
+              <div className="stat"><div className="num">600<span>/day</span></div><div className="lbl">Patient draws across four sites</div></div>
+            </div>
+          </div>
+        </section>
+
+        <section className="timeline">
+          <div className="container">
+            <p className="eyebrow" style={{color: "var(--cyan)"}}>Our history</p>
+            <h2>From one room to four locations.</h2>
+            <p className="lede">A short walk through the milestones that shaped how we work today.</p>
+            <div className="tl-list">
+              {timeline.map(t => (
+                <div className="tl-row" key={t.year}>
+                  <div className="tl-year">{t.year}</div>
+                  <div className="tl-text">
+                    <h3>{t.title}</h3>
+                    <p>{t.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="values">
+          <div className="container">
+            <p className="eyebrow" style={{color: "var(--cyan)"}}>How we work</p>
+            <h2 style={{fontSize: "calc(30px * var(--text-scale, 1))", color: "var(--navy)", fontWeight: 700, margin: "0 0 8px", letterSpacing: "-0.015em"}}>Three things we won't compromise on.</h2>
+            <p style={{color: "var(--muted)", fontSize: "calc(15px * var(--text-scale, 1))", maxWidth: 640, margin: 0, lineHeight: 1.6}}>The values that show up in every shift, every result, every conversation.</p>
+            <div className="grid">
+              {values.map(v => (
+                <div className="value-card" key={v.num}>
+                  <div className="num">— {v.num}</div>
+                  <h3>{v.title}</h3>
+                  <p>{v.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="leadership">
+          <div className="container">
+            <p className="eyebrow" style={{color: "var(--cyan)"}}>Leadership</p>
+            <h2 style={{fontSize: "calc(30px * var(--text-scale, 1))", color: "var(--navy)", fontWeight: 700, margin: "0 0 8px", letterSpacing: "-0.015em"}}>The people running the lab.</h2>
+            <p style={{color: "var(--muted)", fontSize: "calc(15px * var(--text-scale, 1))", maxWidth: 640, margin: 0, lineHeight: 1.6}}>A small leadership team — most of whom you'll see on the floor most days.</p>
+            <div className="grid">
+              {leaders.map(p => (
+                <article className="leader" key={p.name}>
+                  <div className="photo"></div>
+                  <h4>{p.name}</h4>
+                  <div className="role">{p.role}</div>
+                  <p className="bio">{p.bio}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+      <ShellFooter />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("app")).render(<App />);
+</script>
+</body>
+</html>

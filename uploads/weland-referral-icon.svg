@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<svg version="1.1" id="Large_Preview" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 432 432" style="enable-background:new 0 0 432 432;" xml:space="preserve">
+
+<line class="st0" x1="101.1" y1="300.8" x2="229.1" y2="300.8"></line>
+<line class="st0" x1="101.1" y1="332.8" x2="165.1" y2="332.8"></line>
+<circle class="st0" cx="165.1" cy="196.8" r="64"></circle>
+<line class="st0" x1="165.1" y1="164.8" x2="165.1" y2="228.8"></line>
+<line class="st0" x1="133.1" y1="196.8" x2="197.1" y2="196.8"></line>
+<path class="st1" d="M333.1,332.8l20,44.8l20-44.8v-244c0-6.6-5.4-12-12-12h-16c-6.6,0-12,5.4-12,12V332.8z"></path>
+<line class="st1" x1="373.1" y1="116.8" x2="333.1" y2="116.8"></line>
+<path class="st1" d="M189.1,60.8c0-13.3-10.7-24-24-24s-24,10.7-24,24h-24c-8.8,0-16,7.2-16,16v16h128v-16c0-8.8-7.2-16-16-16H189.1&#xA;&#x9;z"></path>
+<polyline class="st1" points="253.1,68.8 285.1,68.8 285.1,380.8 45.1,380.8 45.1,68.8 77.1,68.8 "></polyline>
+</svg>

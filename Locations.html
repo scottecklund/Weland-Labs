@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Locations — Weland Labs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="interior.css?v=9">
+<style>
+  .loc-intro { padding: 64px 0 32px; }
+  .loc-intro .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .loc-intro h2 { font-size: calc(28px * var(--text-scale, 1)); color: var(--navy); font-weight: 700; margin: 0; letter-spacing: -0.015em; }
+  .loc-intro p { color: var(--muted); font-size: calc(15px * var(--text-scale, 1)); line-height: 1.65; margin: 0; }
+
+  .loc-list { padding: 72px 0; background: var(--white); }
+  .loc-card {
+    display: grid;
+    grid-template-columns: 1.3fr 2fr;
+    gap: 32px;
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    align-items: stretch;
+  }
+  .loc-card .loc-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 24px 32px;
+    min-width: 0;
+  }
+  .loc-card .loc-right > .loc-info { grid-column: 1; grid-row: 1; }
+  .loc-card .loc-right > .hours { grid-column: 2; grid-row: 1; }
+  .loc-card .loc-right > .loc-map { grid-column: 1 / -1; grid-row: 2; }
+  .loc-card:last-child { border-bottom: 1px solid var(--border); }
+  .loc-photo {
+    aspect-ratio: auto;
+    min-height: 360px;
+    background: url('assets/location-main.jpg') center/cover no-repeat, linear-gradient(135deg, #c9d4d2, #9eb5b1);
+    position: relative;
+    overflow: hidden;
+  }
+  .loc-photo::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(5,41,66,0.08));
+  }
+  .loc-card .loc-info { display: flex; flex-direction: column; }
+  .loc-card .loc-info .hours { display: none; }
+  .loc-card .num { display: none; }
+  .loc-card .features { display: none; }
+  .loc-card h3 { font-size: calc(26px * var(--text-scale, 1)); color: var(--navy); font-weight: 700; margin: 0 0 12px; letter-spacing: -0.015em; }
+  .loc-card .addr { font-size: calc(14.5px * var(--text-scale, 1)); color: var(--muted); line-height: 1.55; margin: 0 0 18px; }
+  .loc-card .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 4px; }
+  .loc-card .hours { background: var(--bg); padding: 22px 22px; }
+  .loc-card .hours h4 { margin: 0 0 12px; font-size: calc(11px * var(--text-scale, 1)); letter-spacing: 0.12em; color: var(--cyan); text-transform: uppercase; font-weight: 700; }
+  .loc-card .hours-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: calc(13.5px * var(--text-scale, 1)); color: var(--navy); border-top: 1px solid var(--border); }
+  .loc-card .hours-row:first-of-type { border-top: 0; }
+  .loc-card .hours-row .day { color: var(--muted); }
+  .loc-card .hours-row.closed .time { color: rgba(5,41,66,0.4); }
+  .loc-card .phones { margin: 0 0 18px; display: flex; flex-direction: column; gap: 6px; font-size: calc(13.5px * var(--text-scale, 1)); }
+  .loc-card .phones a { display: flex; align-items: center; gap: 8px; color: var(--navy); }
+  .loc-card .phones a span { color: var(--cyan); display: inline-flex; }
+
+  .loc-card .loc-map {
+    position: relative;
+    display: block;
+    min-height: 140px;
+    height: 160px;
+    overflow: hidden;
+    background: #e6ebed;
+    border: 1px solid var(--border);
+  }
+  .loc-card .loc-map iframe {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    border: 0;
+    filter: saturate(0.85);
+  }
+  .loc-card .loc-map-overlay {
+    position: absolute;
+    left: 12px; bottom: 12px;
+    background: var(--white);
+    color: var(--navy);
+    font-size: calc(12px * var(--text-scale, 1));
+    font-weight: 600;
+    padding: 8px 12px;
+    box-shadow: 0 4px 14px rgba(5,41,66,0.18);
+    display: inline-flex; align-items: center; gap: 6px;
+    pointer-events: none;
+  }
+  .loc-card .loc-map:hover .loc-map-overlay { background: var(--cyan); color: var(--white); }
+
+  .info-band { background: var(--white); padding: 64px 0; border-top: 1px solid var(--border); }
+  .info-band .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .info-card { padding: 28px 26px; border-left: 3px solid var(--cyan); background: var(--bg); }
+  .info-card h4 { margin: 0 0 8px; font-size: calc(16px * var(--text-scale, 1)); color: var(--navy); font-weight: 700; }
+  .info-card p { margin: 0; font-size: calc(13.5px * var(--text-scale, 1)); color: var(--muted); line-height: 1.6; }
+
+  @media (max-width: 860px) {
+    .loc-intro .grid { grid-template-columns: 1fr; gap: 16px; }
+    .loc-card { grid-template-columns: 1fr; gap: 20px; }
+    .info-band .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="interior-shell.jsx"></script>
+<script type="text/babel">
+
+const locations = [
+  {
+    num: "01",
+    name: "Main Lab",
+    address: ["1311 1st Avenue SE", "Cedar Rapids, IA 52402"],
+    features: ["Pediatric phlebotomy on staff", "After-hours specimen drop box", "On-site pathology"],
+    hours: [
+      { day: "Mon – Fri", time: "6:00 am – 6:00 pm" },
+      { day: "Saturday", time: "8:00 am – 12:00 pm" },
+      { day: "Sunday", time: "Closed", closed: true },
+    ],
+    phones: ["319.555.1411", "1.800.728.7203"],
+    pin: { x: 38, y: 65 },
+  },
+  {
+    num: "02",
+    name: "Czech Square",
+    address: ["84 16th Avenue SW", "Cedar Rapids, IA 52404"],
+    features: ["Walk-ins welcomed", "Free street parking", "Spanish-speaking staff"],
+    hours: [
+      { day: "Mon – Fri", time: "7:00 am – 5:00 pm" },
+      { day: "Saturday", time: "8:00 am – 12:00 pm" },
+      { day: "Sunday", time: "Closed", closed: true },
+    ],
+    phones: ["319.555.2102", "1.800.728.7203"],
+    pin: { x: 22, y: 60 },
+  },
+  {
+    num: "03",
+    name: "Southwest",
+    address: ["2421 Edgewood Rd SW", "Cedar Rapids, IA 52404"],
+    features: ["Walk-ins welcomed", "After-hours specimen drop box", "Drive-up specimen window"],
+    hours: [
+      { day: "Mon – Fri", time: "6:00 am – 6:00 pm" },
+      { day: "Saturday", time: "8:00 am – 12:00 pm" },
+      { day: "Sunday", time: "Closed", closed: true },
+    ],
+    phones: ["319.555.3344", "1.800.728.7203"],
+    pin: { x: 55, y: 55 },
+  },
+  {
+    num: "04",
+    name: "Marion",
+    address: ["2300 Blairs Ferry Rd", "Marion, IA 52302"],
+    features: ["Walk-ins welcomed", "Co-located with Marion Family Practice", "Free parking lot"],
+    hours: [
+      { day: "Mon – Fri", time: "7:00 am – 5:00 pm" },
+      { day: "Saturday", time: "Closed", closed: true },
+      { day: "Sunday", time: "Closed", closed: true },
+    ],
+    phones: ["319.555.7788", "1.800.728.7203"],
+    pin: { x: 72, y: 50 },
+  },
+];
+
+function App() {
+  return (
+    <>
+      <ShellNav current="locations" />
+      <main>
+        <PageHero
+          crumbs={[{ label: "Home", href: "index.html" }, { label: "Locations" }]}
+          title="Four locations across the Cedar Rapids area."
+          lede="Walk-ins welcome six days a week. Find the site closest to you."
+          image="assets/location-main.jpg"
+          imageAlt="Main lab building"
+        />
+
+        <section className="loc-intro">
+          <div className="container">
+            <div className="grid">
+              <div>
+                <h2>Wherever you are in Linn County, you're under 15 minutes from a Weland draw site.</h2>
+              </div>
+              <div>
+                <p>Each location is staffed by trained phlebotomists and equipped to handle routine bloodwork, urine and stool drop-offs, and most specialty collection kits. The Main Lab also handles pediatric draws and on-site pathology review.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="loc-list">
+          <div className="container">
+            {locations.map(l => (
+              <article className="loc-card" key={l.num}>
+                <div className="loc-photo"></div>
+                <div className="loc-right">
+                  <div className="loc-info">
+                    <h3>{l.name}</h3>
+                    <p className="addr">{l.address[0]}<br/>{l.address[1]}</p>
+                    <div className="phones">
+                      {l.phones.map(p => (
+                        <a key={p} href={`tel:${p}`}><span><IShell.Phone /></span> {p}</a>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="hours">
+                    <h4>Hours</h4>
+                    {l.hours.map((h, i) => (
+                      <div key={i} className={`hours-row${h.closed ? " closed" : ""}`}>
+                        <span className="day">{h.day}</span>
+                        <span className="time">{h.time}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <a
+                    className="loc-map"
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(l.address.join(", "))}`}
+                    target="_blank"
+                    rel="noopener"
+                    aria-label={`Open ${l.name} in Google Maps`}>
+
+                    <iframe
+                      title={`${l.name} map`}
+                      src={`https://maps.google.com/maps?q=${encodeURIComponent(l.address.join(", "))}&z=14&output=embed`}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade">
+                    </iframe>
+                    <div className="loc-map-overlay">
+                      <span>View on Google Maps <IShell.Arrow /></span>
+                    </div>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="info-band">
+          <div className="container">
+            <p className="eyebrow" style={{color: "var(--cyan)"}}>Good to know</p>
+            <h2 style={{fontSize: "calc(28px * var(--text-scale, 1))", color: "var(--navy)", fontWeight: 700, margin: "0 0 32px", letterSpacing: "-0.015em"}}>Before you visit.</h2>
+            <div className="grid">
+              <div className="info-card">
+                <h4>No appointment needed</h4>
+                <p>Walk in any time we're open. If your order requires fasting or special prep, your provider will let you know in advance.</p>
+              </div>
+              <div className="info-card">
+                <h4>What to bring</h4>
+                <p>A photo ID, your insurance card, and any lab order form your provider gave you. If your order is electronic, we likely already have it.</p>
+              </div>
+              <div className="info-card">
+                <h4>Wait times</h4>
+                <p>Mornings before 9am are our busiest. Most patients are in and out in under 20 minutes; expect 30+ on Monday mornings.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <ShellFooter />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("app")).render(<App />);
+</script>
+</body>
+</html>

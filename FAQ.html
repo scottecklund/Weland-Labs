@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Weland Labs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="interior.css?v=9">
+<style>
+  /* FAQ-specific */
+  body { background: var(--bg); }
+  .faq-page { background: var(--bg); padding: 72px 0 96px; }
+  .faq-page .container { max-width: 880px; }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .faq-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .faq-item:hover {
+    border-color: rgba(5,41,66,0.18);
+  }
+  .faq-item.open {
+    box-shadow: 0 12px 32px -16px rgba(5,41,66,0.18);
+    border-color: var(--cyan);
+  }
+
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: 0;
+    padding: 22px 26px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    color: var(--navy);
+    font-size: calc(17px * var(--text-scale, 1));
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+  .faq-q:hover { color: var(--cyan); }
+  .faq-q:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: -2px;
+  }
+
+  .faq-icon {
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg);
+    color: var(--cyan);
+    display: grid;
+    place-items: center;
+    transition: transform 0.25s ease, background 0.2s ease;
+  }
+  .faq-item.open .faq-icon {
+    background: var(--cyan);
+    color: var(--white);
+    transform: rotate(45deg);
+  }
+  .faq-icon svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+  }
+
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .faq-item.open .faq-a {
+    max-height: 600px;
+  }
+  .faq-a-inner {
+    padding: 20px 26px 24px;
+    color: var(--muted);
+    font-size: calc(15px * var(--text-scale, 1));
+    line-height: 1.7;
+    border-top: 1px solid var(--border);
+  }
+  .faq-a-inner p { margin: 0 0 12px; }
+  .faq-a-inner p:last-child { margin: 0; }
+  .faq-a-inner ul {
+    margin: 8px 0 0;
+    padding-left: 18px;
+  }
+  .faq-a-inner li { margin: 4px 0; }
+  .faq-a-inner strong { color: var(--navy); font-weight: 600; }
+
+  .faq-cta {
+    margin-top: 64px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    padding: 40px 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .faq-cta h3 {
+    font-size: calc(22px * var(--text-scale, 1));
+    color: var(--navy);
+    font-weight: 700;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .faq-cta p {
+    color: var(--muted);
+    font-size: calc(14.5px * var(--text-scale, 1));
+    margin: 0;
+  }
+  .faq-cta-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 640px) {
+    .faq-page { padding: 48px 0 72px; }
+    .faq-q { padding: 18px 20px; font-size: calc(15.5px * var(--text-scale, 1)); }
+    .faq-a-inner { padding: 18px 20px 20px; }
+    .faq-cta { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="interior-shell.jsx"></script>
+<script type="text/babel">
+
+
+const { useState } = React;
+
+const Plus = () => (
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M12 5v14M5 12h14" />
+  </svg>
+);
+
+const faqGroups = [
+  {
+    title: "Visiting & appointments",
+    items: [
+      {
+        q: "Do I need an appointment for a blood draw?",
+        a: <p>No appointment is required. Walk-ins are welcome at all four locations during open hours. If you'd prefer a reserved time, you can call ahead — but most patients are seen within a few minutes of arrival.</p>
+      },
+      {
+        q: "What should I bring to my visit?",
+        a: <>
+          <p>Please bring:</p>
+          <ul>
+            <li>A photo ID</li>
+            <li>Your insurance card (if applicable)</li>
+            <li>The lab order or requisition from your provider</li>
+          </ul>
+          <p>If you don't have a paper requisition, that's fine — most providers send orders to us electronically.</p>
+        </>
+      },
+      {
+        q: "How long will my visit take?",
+        a: <p>A standard blood draw typically takes 10–15 minutes from arrival to walking out the door. Specialty collections (glucose tolerance, 24-hour urine setup, etc.) take longer — call ahead and we'll give you an estimate.</p>
+      },
+      {
+        q: "Can I bring my child for a blood draw?",
+        a: <p>Yes. Our phlebotomists are experienced with pediatric patients of all ages. We recommend a parent or guardian be present, and bringing along a comfort item is welcome.</p>
+      }
+    ]
+  },
+  {
+    title: "Preparation & fasting",
+    items: [
+      {
+        q: "Do I need to fast before my test?",
+        a: <p>It depends on the test. Lipid panels, fasting glucose, and basic metabolic panels typically require an 8–12 hour fast. Most other tests do not. If you're unsure, check with your provider or call us at <strong>319.366.1503</strong>.</p>
+      },
+      {
+        q: "Can I drink water while fasting?",
+        a: <p>Yes — plain water is encouraged. Staying hydrated actually makes the blood draw easier. Avoid coffee, tea, juice, gum, and mints during your fast.</p>
+      },
+      {
+        q: "Should I take my regular medications?",
+        a: <p>In most cases, yes. Don't stop any prescribed medication without first talking to your provider. If your test is specifically affected by a medication, your provider will tell you in advance.</p>
+      }
+    ]
+  },
+  {
+    title: "Results & turnaround",
+    items: [
+      {
+        q: "How long until my results are ready?",
+        a: <p>Most routine tests are resulted the same day. Specialty assays and pathology reports may take 2–5 business days. Your ordering provider receives results directly through their electronic medical record system.</p>
+      },
+      {
+        q: "How will I get my results?",
+        a: <p>Results are sent to the provider who ordered the test. Contact your provider's office to review them, or check your patient portal if your clinic offers one. We do not release results directly to patients without provider authorization.</p>
+      },
+      {
+        q: "What if my results are abnormal?",
+        a: <p>Your ordering provider will review every result and contact you if any follow-up is needed. If you have questions about a specific result, your provider's office is the best place to start.</p>
+      }
+    ]
+  },
+  {
+    title: "Insurance & billing",
+    items: [
+      {
+        q: "Do you accept my insurance?",
+        a: <p>We accept most major insurance plans, including Medicare and Medicaid. Bring your card to your visit and we'll verify coverage. For a definitive answer about a specific test, call your insurer with the CPT code from your provider's order.</p>
+      },
+      {
+        q: "Can I pay out of pocket?",
+        a: <p>Yes. Self-pay pricing is available for direct-access tests and for patients without coverage. Ask at the front desk and we'll print a price list for the tests you need.</p>
+      },
+      {
+        q: "Will I get a separate bill from the lab?",
+        a: <p>In most cases, yes. You'll receive a bill from Weland Clinical Laboratories that's separate from any bills from your provider's office or hospital. Questions about a bill? Call <strong>319.366.1503</strong> and ask for billing.</p>
+      }
+    ]
+  },
+  {
+    title: "For providers",
+    items: [
+      {
+        q: "How do I refer a patient or order a test?",
+        a: <p>We integrate directly with Epic, Cerner, and Athena via HL7 and FHIR. To set up integration with your EMR, or to order a test by paper requisition, contact our client services team at <strong>319.366.1503</strong>.</p>
+      },
+      {
+        q: "Do you offer courier pickup?",
+        a: <p>Yes. We provide complimentary specimen pickup for nursing homes, clinics, and care facilities throughout Linn and Johnson counties. Pickups can be scheduled daily, weekly, or on-demand.</p>
+      },
+      {
+        q: "Can you handle reference and overflow testing?",
+        a: <p>Absolutely. We partner with regional clinics and hospitals as a reference lab — handling overflow, specialty assays, and after-hours testing. Same-day courier service and dedicated client services Mon–Sat.</p>
+      }
+    ]
+  }
+];
+
+function FaqItem({ q, a }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={`faq-item${open ? " open" : ""}`}>
+      <button className="faq-q" aria-expanded={open} onClick={() => setOpen(!open)}>
+        <span>{q}</span>
+        <span className="faq-icon"><Plus /></span>
+      </button>
+      <div className="faq-a" role="region">
+        <div className="faq-a-inner">{a}</div>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <ShellNav current="faq" />
+      <main>
+        <PageHero
+          crumbs={[{ label: "Home", href: "index.html" }, { label: "FAQ" }]}
+          title="Frequently asked questions."
+          lede="Visits, prep, results, billing — answers to what patients and providers ask us most."
+          image="assets/faq-hero.jpg"
+          imageAlt="Gloved hand holding a labeled lab specimen container"
+        />
+
+        <section className="faq-page">
+          <div className="container">
+            {faqGroups.map((group, gi) => (
+              <div key={gi} style={{ marginBottom: gi === faqGroups.length - 1 ? 0 : 56 }}>
+                <p className="eyebrow" style={{ color: "var(--cyan)", marginBottom: 12 }}>{String(gi + 1).padStart(2, "0")}</p>
+                <h2 style={{ fontSize: "calc(26px * var(--text-scale, 1))", color: "var(--navy)", fontWeight: 700, margin: "0 0 24px", letterSpacing: "-0.015em" }}>{group.title}</h2>
+                <div className="faq-list">
+                  {group.items.map((it, i) => <FaqItem key={i} q={it.q} a={it.a} />)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+      <ShellFooter />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("app")).render(<App />);
+</script>
+</body>
+</html>

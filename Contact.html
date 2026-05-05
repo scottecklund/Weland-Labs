@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Weland Labs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="interior.css?v=9">
+<style>
+  .contact-grid { padding: 72px 0; display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: start; }
+  @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; gap: 32px; padding: 48px 0; } }
+
+  .contact-form h2 { font-size: calc(28px * var(--text-scale, 1)); color: var(--navy); font-weight: 700; margin: 0 0 8px; letter-spacing: -0.015em; }
+  .contact-form .lede { color: var(--muted); font-size: calc(15px * var(--text-scale, 1)); line-height: 1.6; margin: 0 0 32px; max-width: 540px; }
+
+  form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  form .field { margin-bottom: 18px; }
+  form label { display: block; font-size: calc(12px * var(--text-scale, 1)); letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 6px; }
+  form input, form select, form textarea {
+    width: 100%; box-sizing: border-box;
+    border: 1px solid var(--border);
+    background: var(--white);
+    padding: 12px 14px;
+    font-family: inherit;
+    font-size: calc(14.5px * var(--text-scale, 1));
+    color: var(--navy);
+    border-radius: 0;
+    transition: border-color .15s;
+  }
+  form input:focus, form select:focus, form textarea:focus {
+    outline: none; border-color: var(--cyan);
+  }
+  form textarea { min-height: 120px; resize: vertical; }
+  .topic-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .topic-pill {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    cursor: pointer;
+    font-size: calc(13.5px * var(--text-scale, 1));
+    color: var(--navy);
+    transition: all .15s;
+  }
+  .topic-pill input { width: auto; margin: 0; accent-color: var(--cyan); }
+  .topic-pill.active, .topic-pill:hover { border-color: var(--cyan); background: var(--bg); }
+  .submit-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 12px; }
+  .submit-row p { margin: 0; font-size: calc(12.5px * var(--text-scale, 1)); color: var(--muted); max-width: 360px; line-height: 1.5; }
+  button.submit-btn {
+    position: relative; overflow: hidden; isolation: isolate;
+    background: var(--cyan); color: var(--navy);
+    border: 2.5px solid var(--cyan);
+    padding: 12px 28px;
+    font-weight: 700;
+    font-size: calc(14.5px * var(--text-scale, 1));
+    transition: color .25s ease, border-color .25s ease;
+    display: inline-flex; align-items: center; gap: 10px;
+    cursor: pointer;
+  }
+  button.submit-btn::before {
+    content: "";
+    position: absolute;
+    top: -10%; left: -30%;
+    width: 160%; height: 120%;
+    background: var(--navy);
+    transform: translateX(-110%) skewX(-20deg);
+    transition: transform .35s cubic-bezier(0.7, 0, 0.2, 1);
+    z-index: -1;
+  }
+  button.submit-btn:hover { color: var(--white); border-color: var(--navy); }
+  button.submit-btn:hover::before { transform: translateX(0) skewX(-20deg); }
+
+  .contact-side { background: var(--navy); color: var(--white); padding: 36px 36px 40px; }
+  .contact-side h3 { font-size: calc(13px * var(--text-scale, 1)); letter-spacing: 0.18em; text-transform: uppercase; color: var(--green-bright); margin: 0 0 18px; font-weight: 700; }
+  .contact-side .row {
+    display: block;
+    padding: 18px 0;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .contact-side .row:first-of-type { border-top: 0; padding-top: 0; }
+  .contact-side .lbl { font-size: calc(12px * var(--text-scale, 1)); color: rgba(255,255,255,0.55); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+  .contact-side a, .contact-side .val { color: var(--white); font-size: calc(15.5px * var(--text-scale, 1)); font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+  .contact-side a:hover { color: var(--cyan); }
+  .contact-side .small { color: rgba(255,255,255,0.65); font-size: calc(13px * var(--text-scale, 1)); margin-top: 4px; line-height: 1.55; }
+
+  .faq { padding: 80px 0; background: var(--white); border-top: 1px solid var(--border); }
+  .faq h2 { font-size: calc(30px * var(--text-scale, 1)); color: var(--navy); font-weight: 700; margin: 0 0 8px; letter-spacing: -0.015em; }
+  .faq-list { margin-top: 32px; }
+  .faq-item { border-top: 1px solid var(--border); }
+  .faq-item:last-child { border-bottom: 1px solid var(--border); }
+  .faq-q {
+    width: 100%; text-align: left;
+    padding: 22px 0;
+    background: none; border: 0;
+    font-family: inherit;
+    font-size: calc(17px * var(--text-scale, 1));
+    color: var(--navy);
+    font-weight: 600;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .faq-q .plus { color: var(--cyan); font-size: 22px; transition: transform .2s; }
+  .faq-item.open .faq-q .plus { transform: rotate(45deg); }
+  .faq-a { display: none; padding: 0 0 22px; color: var(--muted); font-size: calc(14.5px * var(--text-scale, 1)); line-height: 1.65; max-width: 720px; }
+  .faq-item.open .faq-a { display: block; }
+
+  .urgent { background: var(--bg); padding: 56px 0; border-top: 1px solid var(--border); }
+  .urgent .grid { display: grid; grid-template-columns: 1fr 2fr; gap: 32px; align-items: center; }
+  .urgent h2 { font-size: calc(22px * var(--text-scale, 1)); color: var(--navy); margin: 0; font-weight: 700; }
+  .urgent p { margin: 8px 0 0; color: var(--muted); font-size: calc(14px * var(--text-scale, 1)); line-height: 1.6; }
+  @media (max-width: 860px) {
+    .urgent .grid { grid-template-columns: 1fr; }
+    form .row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="interior-shell.jsx"></script>
+<script type="text/babel">
+const { useState } = React;
+
+const topics = [
+  "Question about a test",
+  "Insurance & billing",
+  "Provider partnership",
+  "Wellness / self-pay",
+  "Hours & directions",
+  "Other",
+];
+
+const faqs = [
+  { q: "Do I need an appointment?", a: "No — every Weland Labs location accepts walk-ins during open hours. If you'd prefer to call ahead and confirm staff availability for a specialty draw, you're always welcome to." },
+  { q: "What should I bring?", a: "A photo ID, your insurance card, and any lab order form your provider gave you. If your provider sent the order electronically, we likely already have it on file." },
+  { q: "Do you accept my insurance?", a: "We're in-network with most major Iowa plans — Wellmark Blue Cross, UnitedHealthcare, Aetna, Cigna, Medica, Medicare, and Medicaid (Iowa Total Care, Amerigroup, Molina). Call our billing team if you're unsure about your specific plan." },
+  { q: "How long until I get results?", a: "Most routine results are released to your provider the same day or by next morning. Surgical pathology and specialty assays typically take 2–5 business days. Stat orders are processed within 60 minutes." },
+  { q: "Can I get my results directly?", a: "Results are released to your ordering provider, who will share them with you through your patient portal or at your follow-up visit. For self-pay wellness panels, results are emailed to you in PDF format." },
+  { q: "Do I need to fast?", a: "Some tests require fasting (lipid panels, glucose, comprehensive metabolic panels), some don't. Your provider will tell you in advance — when in doubt, fast for 8–12 hours and bring water." },
+];
+
+function App() {
+  const [topic, setTopic] = useState(topics[0]);
+  const [openFaq, setOpenFaq] = useState(0);
+
+  return (
+    <>
+      <ShellNav current="contact" />
+      <main>
+        <PageHero
+          crumbs={[{ label: "Home", href: "index.html" }, { label: "Contact" }]}
+          title="Get in touch."
+          lede="A real person answers our phones, Monday through Saturday."
+          image="assets/contact-hero.jpg"
+          imageAlt="Weland Labs receptionist on the phone"
+        />
+
+        <section>
+          <div className="container contact-grid">
+            <div className="contact-form">
+              <h2>Send us a message.</h2>
+              <p className="lede">We typically respond within one business day. For urgent clinical questions, please call us directly — see numbers at right.</p>
+              <form onSubmit={(e) => { e.preventDefault(); alert("This is a design mockup — form submission is not wired up."); }}>
+                <div className="field">
+                  <label>What's this about?</label>
+                  <div className="topic-list">
+                    {topics.map(t => (
+                      <label key={t} className={`topic-pill${topic === t ? " active" : ""}`}>
+                        <input type="radio" name="topic" checked={topic === t} onChange={() => setTopic(t)} />
+                        <span>{t}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="field">
+                    <label htmlFor="fn">First name</label>
+                    <input id="fn" type="text" placeholder="Sarah" />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="ln">Last name</label>
+                    <input id="ln" type="text" placeholder="Connor" />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="field">
+                    <label htmlFor="em">Email</label>
+                    <input id="em" type="email" placeholder="sarah@example.com" />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="ph">Phone (optional)</label>
+                    <input id="ph" type="tel" placeholder="319-555-0142" />
+                  </div>
+                </div>
+                <div className="field">
+                  <label htmlFor="loc">Preferred location</label>
+                  <select id="loc">
+                    <option>No preference</option>
+                    <option>Main Lab — 1st Avenue SE</option>
+                    <option>Czech Square — 16th Avenue SW</option>
+                    <option>Southwest — Edgewood Rd SW</option>
+                    <option>Marion — Blairs Ferry Rd</option>
+                  </select>
+                </div>
+                <div className="field">
+                  <label htmlFor="msg">Message</label>
+                  <textarea id="msg" placeholder="Tell us how we can help..."></textarea>
+                </div>
+                <div className="submit-row">
+                  <p>By submitting, you agree to our privacy policy. We never share patient information.</p>
+                  <button type="submit" className="submit-btn">Send message <IShell.Arrow /></button>
+                </div>
+              </form>
+            </div>
+
+            <aside className="contact-side">
+              <h3>Reach us directly</h3>
+              <div className="row">
+                <div className="lbl">Patient line</div>
+                <a href="tel:1.800.728.7203"><IShell.Phone /> 1.800.728.7203</a>
+                <p className="small">Mon–Fri 6am–6pm · Sat 8am–noon</p>
+              </div>
+              <div className="row">
+                <div className="lbl">Provider line</div>
+                <a href="tel:319.555.1411"><IShell.Phone /> 319.555.1411</a>
+                <p className="small">Direct to client services. After hours, leave a message and we'll call back by 8am.</p>
+              </div>
+              <div className="row">
+                <div className="lbl">Billing</div>
+                <a href="mailto:billing@welandlabs.example">billing@welandlabs.example</a>
+                <p className="small">For questions about a statement or insurance claim.</p>
+              </div>
+              <div className="row">
+                <div className="lbl">Provider partnerships</div>
+                <a href="mailto:providers@welandlabs.example">providers@welandlabs.example</a>
+                <p className="small">For clinics or hospitals interested in reference services or EMR integration.</p>
+              </div>
+              <div className="row">
+                <div className="lbl">Mailing address</div>
+                <span className="val" style={{fontSize: "calc(14.5px * var(--text-scale, 1))", fontWeight: 500, lineHeight: 1.55, alignItems: "flex-start"}}>1311 1st Avenue SE<br/>Cedar Rapids, IA 52402</span>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section className="urgent">
+          <div className="container">
+            <div className="grid">
+              <div>
+                <p className="eyebrow" style={{color: "var(--cyan)", margin: 0}}>Important</p>
+              </div>
+              <div>
+                <h2>If you're experiencing a medical emergency, call 911.</h2>
+                <p>Weland Labs is a diagnostic facility — we don't provide emergency or urgent care. For questions about test results or symptoms, please contact your ordering provider's office.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <ShellFooter />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("app")).render(<App />);
+</script>
+</body>
+</html>

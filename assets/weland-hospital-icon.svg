@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Large_Preview" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 432 432" style="enable-background:new 0 0 432 432;" xml:space="preserve">
+
+<polygon class="st0" fill="#80C241" points="118,155.5 118,143.5 84,143.5 84,171.5 63,171.5 63,372.5 118,372.5 118,360.5 75,360.5 75,183.5 &#x9;118,183.5 118,171.5 96,171.5 96,155.5 "></polygon>
+<polygon class="st0" fill="#80C241" points="355,241.5 355,213.5 321,213.5 321,225.5 343,225.5 343,241.5 321,241.5 321,253.5 357,253.5 &#x9;357,360.5 321,360.5 321,372.5 369,372.5 369,241.5 "></polygon>
+<g>
+&#x9;<polygon class="st1" fill="#45BBEC" points="180,197.5 196,197.5 196,219.5 208,219.5 208,185.5 168,185.5 168,219.5 180,219.5 &#x9;"></polygon>
+&#x9;<polygon class="st1" fill="#45BBEC" points="180,253.5 196,253.5 196,275.5 208,275.5 208,241.5 168,241.5 168,275.5 180,275.5 &#x9;"></polygon>
+&#x9;<polygon class="st1" fill="#45BBEC" points="243,197.5 259,197.5 259,219.5 271,219.5 271,185.5 231,185.5 231,219.5 243,219.5 &#x9;"></polygon>
+&#x9;<polygon class="st1" fill="#45BBEC" points="180,141.5 196,141.5 196,163.5 208,163.5 208,129.5 168,129.5 168,163.5 180,163.5 &#x9;"></polygon>
+&#x9;<polygon class="st1" fill="#45BBEC" points="243,141.5 259,141.5 259,163.5 271,163.5 271,129.5 231,129.5 231,163.5 243,163.5 &#x9;"></polygon>
+&#x9;<polygon class="st1" fill="#45BBEC" points="243,253.5 259,253.5 259,275.5 271,275.5 271,241.5 231,241.5 231,275.5 243,275.5 &#x9;"></polygon>
+&#x9;<path class="st1" fill="#45BBEC" d="M278,87.5v-28H154v28h-21v285h63h47h63v-285H278z M166,71.5h100v16H166V71.5z M208,360.5v-44h23v44H208z&#x9; M294,360.5h-51v-56h-47v56h-51v-261h149V360.5z"></path>
+</g>
+</svg>

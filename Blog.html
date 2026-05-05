@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blog · Weland Labs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="interior.css?v=9">
+<style>
+  body { background: var(--bg); }
+
+  /* ===== BLOG INDEX ===== */
+  .blog-index { padding: 64px 0 96px; }
+
+  .blog-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .blog-filters .filter-label {
+    font-family: 'Manrope', system-ui, sans-serif;
+    font-size: calc(11px * var(--text-scale, 1));
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-right: 16px;
+  }
+  .filter-chip {
+    background: var(--white);
+    border: 1px solid var(--border);
+    color: var(--navy);
+    padding: 8px 16px;
+    font-size: calc(13px * var(--text-scale, 1));
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .15s;
+    font-family: inherit;
+  }
+  .filter-chip:hover { border-color: var(--cyan); color: var(--cyan); }
+  .filter-chip.active { background: var(--cyan); color: var(--white); border-color: var(--cyan); }
+
+  /* Featured */
+  .blog-featured {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 48px;
+    align-items: center;
+    background: var(--white);
+    margin-bottom: 64px;
+    border: 1px solid var(--border);
+  }
+  .blog-featured-image {
+    aspect-ratio: 5/4;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--navy-2);
+  }
+  .blog-featured-text { padding: 48px 48px 48px 0; }
+  .blog-featured .feat-eyebrow {
+    font-family: 'Manrope', system-ui, sans-serif;
+    font-size: calc(11px * var(--text-scale, 1));
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--cyan);
+    margin: 0 0 16px;
+    font-weight: 700;
+  }
+  .blog-featured h2 {
+    font-size: calc(34px * var(--text-scale, 1));
+    color: var(--navy);
+    font-weight: 700;
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .blog-featured .feat-dek {
+    font-size: calc(16px * var(--text-scale, 1));
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0 0 24px;
+    max-width: 540px;
+  }
+  .blog-featured .feat-meta {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    font-size: calc(13px * var(--text-scale, 1));
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .blog-featured .feat-meta .dot { opacity: 0.4; }
+
+  /* Index grid */
+  .blog-index-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+  .blog-index-head h2 {
+    font-size: calc(20px * var(--text-scale, 1));
+    color: var(--navy);
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .blog-index-head .count {
+    font-family: 'Manrope', system-ui, sans-serif;
+    font-size: calc(12px * var(--text-scale, 1));
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px 32px;
+  }
+  .post-tile { display: block; cursor: pointer; }
+  .post-tile-image {
+    aspect-ratio: 16/10;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--navy-2);
+    margin-bottom: 18px;
+    overflow: hidden;
+    transition: transform .4s ease;
+  }
+  .post-tile:hover .post-tile-image { transform: translateY(-4px); }
+  .post-tile-cat {
+    font-family: 'Manrope', system-ui, sans-serif;
+    font-size: calc(11px * var(--text-scale, 1));
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--cyan);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .post-tile h3 {
+    font-size: calc(22px * var(--text-scale, 1));
+    color: var(--navy);
+    font-weight: 700;
+    margin: 0 0 10px;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    transition: color .15s;
+  }
+  .post-tile:hover h3 { color: var(--cyan); }
+  .post-tile p {
+    font-size: calc(14px * var(--text-scale, 1));
+    color: var(--muted);
+    line-height: 1.55;
+    margin: 0 0 14px;
+  }
+  .post-tile-meta {
+    display: flex;
+    gap: 10px;
+    font-size: calc(12.5px * var(--text-scale, 1));
+    color: var(--muted);
+  }
+  .post-tile-meta .dot { opacity: 0.4; }
+
+  @media (max-width: 960px) {
+    .blog-featured { grid-template-columns: 1fr; gap: 0; }
+    .blog-featured-text { padding: 36px; }
+    .blog-featured h2 { font-size: calc(28px * var(--text-scale, 1)); }
+    .post-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  @media (max-width: 560px) {
+    .blog-featured-text { padding: 28px 24px; }
+    .blog-index { padding: 48px 0 72px; }
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="interior-shell.jsx"></script>
+<script type="text/babel" src="posts.jsx"></script>
+<script type="text/babel">
+
+const { useState, useMemo } = React;
+
+function App() {
+  const [filter, setFilter] = useState("All");
+  const featured = blogPosts[0];
+  const rest = blogPosts.slice(1);
+
+  const cats = useMemo(() => {
+    const set = new Set(blogPosts.map((p) => p.category));
+    return ["All", ...Array.from(set)];
+  }, []);
+
+  const visible = filter === "All" ? rest : blogPosts.filter((p) => p.category === filter);
+  const showFeatured = filter === "All";
+
+  return (
+    <>
+      <ShellNav current="blog" />
+      <main>
+        <PageHero
+          crumbs={[{ label: "Home", href: "index.html" }, { label: "Blog" }]}
+          title="Notes from the lab."
+          lede="Patient guides, prep instructions, and answers to the questions we hear most often at the front desk."
+          image="assets/blog-hero.jpg"
+          imageAlt="Clinician writing notes at a desk"
+        />
+
+        <section className="blog-index">
+          <div className="container">
+            <div className="blog-filters">
+              <span className="filter-label">Topics</span>
+              {cats.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  className={`filter-chip${filter === c ? " active" : ""}`}
+                  onClick={() => setFilter(c)}>
+                  {c}
+                </button>
+              ))}
+            </div>
+
+            {showFeatured && (
+              <a href={postUrl(featured)} className="blog-featured" style={{ textDecoration: "none" }}>
+                <div
+                  className="blog-featured-image"
+                  style={{ backgroundImage: `url('${featured.image}')` }}
+                  role="img"
+                  aria-label={featured.imageAlt}>
+                </div>
+                <div className="blog-featured-text">
+                  <p className="feat-eyebrow">{featured.category}</p>
+                  <h2>{featured.title}</h2>
+                  <p className="feat-dek">{featured.dek}</p>
+                  <span className="btn btn-outline">Read article <IShell.Arrow /></span>
+                </div>
+              </a>
+            )}
+
+            <div className="blog-index-head">
+              <h2>{showFeatured ? "More articles" : `${filter} articles`}</h2>
+
+            </div>
+
+            <div className="post-grid">
+              {visible.map((p) => (
+                <a key={p.slug} href={postUrl(p)} className="post-tile" style={{ textDecoration: "none" }}>
+                  <div
+                    className="post-tile-image"
+                    style={{ backgroundImage: `url('${p.image}')` }}
+                    role="img"
+                    aria-label={p.imageAlt}>
+                  </div>
+                  <div className="post-tile-cat">{p.category}</div>
+                  <h3>{p.title}</h3>
+                  <p>{p.dek}</p>
+
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+      <ShellFooter />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("app")).render(<App />);
+</script>
+</body>
+</html>

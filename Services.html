@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Weland Labs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="interior.css?v=9">
+<style>
+  /* Services-specific */
+  .svc-list { display: grid; grid-template-columns: 1fr; gap: 0; }
+  .svc-row {
+    display: grid;
+    grid-template-columns: 88px 1fr 1.4fr 200px;
+    gap: 32px;
+    align-items: start;
+    padding: 36px 0;
+    border-top: 1px solid var(--border);
+  }
+  .svc-row:last-child { border-bottom: 1px solid var(--border); }
+  .svc-row .svc-num {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: calc(13px * var(--text-scale, 1));
+    color: var(--cyan);
+    letter-spacing: 0.06em;
+    padding-top: 8px;
+  }
+  .svc-row h3 {
+    font-size: calc(22px * var(--text-scale, 1));
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .svc-row .svc-tags {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px;
+  }
+  .svc-row .svc-tag {
+    font-size: calc(11px * var(--text-scale, 1));
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+  }
+  .svc-row p {
+    color: var(--muted);
+    font-size: calc(14.5px * var(--text-scale, 1));
+    line-height: 1.65;
+    margin: 0 0 12px;
+  }
+  .svc-row ul {
+    margin: 8px 0 0;
+    padding-left: 18px;
+    color: var(--muted);
+    font-size: calc(13.5px * var(--text-scale, 1));
+    line-height: 1.7;
+  }
+  .svc-row .svc-meta { font-size: calc(13px * var(--text-scale, 1)); color: var(--navy); }
+  .svc-row .svc-meta strong { color: var(--cyan); font-weight: 700; display: block; font-size: calc(12px * var(--text-scale, 1)); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+  .svc-row .svc-meta + .svc-meta { margin-top: 14px; }
+
+  .panels {
+    background: var(--bg);
+    padding: 64px 0;
+    margin-top: 64px;
+    border-top: 1px solid var(--border);
+  }
+  .panels h2 {
+    font-size: calc(28px * var(--text-scale, 1));
+    color: var(--navy); font-weight: 700; margin: 0 0 8px;
+  }
+  .panels .lede { color: var(--muted); font-size: calc(15px * var(--text-scale, 1)); max-width: none; margin: 0 0 32px; line-height: 1.6; }
+  .panel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .panel-card {
+    border: 1px solid var(--border);
+    padding: 28px 26px 30px;
+    background: var(--white);
+    transition: all .15s;
+  }
+  .panel-card:hover { background: var(--white); border-color: var(--cyan); }
+  .panel-card h4 { margin: 0 0 10px; font-size: calc(18px * var(--text-scale, 1)); color: var(--navy); font-weight: 700; letter-spacing: -0.005em; }
+  .panel-card .panel-num { font-family: ui-monospace, monospace; font-size: calc(12px * var(--text-scale, 1)); color: var(--cyan); letter-spacing: 0.08em; font-weight: 700; margin-bottom: 8px; }
+  .panel-card .panel-icon { width: 56px; height: 56px; margin-bottom: 18px; display: block; }
+  .panel-card .panel-icon img, .panel-card .panel-icon svg { width: 100%; height: 100%; display: block; }
+  .panel-card a.panel-cta { margin-top: 20px; color: var(--navy); }
+  .panel-card a.panel-cta svg { color: var(--cyan); }
+  .panel-card a.panel-cta:hover { color: var(--navy); }
+  .panel-card a.panel-cta:hover svg { color: var(--white); }
+  .btn-faq { color: var(--navy); }
+  .btn-faq:hover { color: var(--white); }
+  .panel-card p { margin: 8px 0 0; font-size: calc(14px * var(--text-scale, 1)); color: var(--muted); line-height: 1.65; }
+  .panel-card a { color: var(--cyan); font-weight: 600; text-decoration: none; }
+  .panel-card a:hover { color: var(--navy); }
+
+  @media (max-width: 860px) {
+    .svc-row { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
+    .svc-row .svc-num { padding-top: 0; }
+    .panel-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="interior-shell.jsx"></script>
+<script type="text/babel">
+
+
+const SvcIcon = {
+  Drop: () =>
+  <svg width="48" height="48" viewBox="0 0 432 432">
+      <path className="st0" d="M141.8,350.5c-20.5-18.1-31.8-42.3-31.8-68.3c0-44.1,22.9-76.4,49.5-113.8c20-28.1,42.3-59.5,56.5-100 c14.2,40.5,36.5,71.9,56.5,100c7.1,10,13.9,19.6,20.1,29.1l10.3-6.1c-6.5-10-13.5-19.9-20.6-30c-23.5-33-47.7-67.2-60.5-114.9 L216,24.8l-5.8,21.7c-12.8,47.7-37,81.9-60.5,114.9C123.1,198.8,98,234.2,98,282.2c0,29.5,12.7,56.9,35.8,77.3 c18.8,16.6,43.5,27.2,69.2,29.9v-12.1C180.2,374.6,158.5,365.2,141.8,350.5z" />
+      <path className="st1" d="M319.8,259.2c0.1,0.5,0.2,0.9,0.2,1.4c0.2,0.9,0.3,1.8,0.5,2.7c0.1,0.6,0.2,1.2,0.3,1.9 c0.1,0.8,0.2,1.5,0.3,2.3c0.1,0.7,0.2,1.3,0.2,2c0.1,0.7,0.1,1.5,0.2,2.2s0.1,1.3,0.2,2c0.1,0.9,0.1,1.7,0.1,2.6 c0,0.6,0.1,1.1,0.1,1.7c0,1.4,0.1,2.9,0.1,4.3c0,1.6,0,3.2-0.1,4.8c-0.1,2.4-0.4,4.8-0.7,7.2c-0.2,1.6-0.5,3.2-0.8,4.7 c-2.6,13.3-8.2,25.8-16.6,36.9c-3.9,5.2-8.5,10.1-13.6,14.6c-11.8,10.4-26.1,18.2-41.5,22.7c-2.4,0.7-4.9,1.4-7.4,1.9 c-1.7,0.4-3.3,0.7-5,1c-6.7,1.2-13.5,1.8-20.3,1.8v12c30.2,0,60.2-11.1,82.2-30.5c23.1-20.4,35.8-47.8,35.8-77.3 c0-1.6,0-3.1-0.1-4.6c0-1-0.1-1.9-0.1-2.9c0-0.5,0-1-0.1-1.5c-0.1-1.3-0.2-2.6-0.3-3.8c0-0.1,0-0.2,0-0.4 c-2.4-24.7-11.5-46-23.6-66.5l-10.3,6.1C309,224.7,316.4,241,319.8,259.2z" />
+      <path className="st0" d="M149,290.7l-11.7,2.8c6.7,27.9,29.1,49.6,58.4,56.8l2.8-11.7C174,332.6,154.5,313.8,149,290.7z" />
+    </svg>,
+
+  Microscope: () =>
+  <svg width="48" height="48" viewBox="0 0 432 432">
+      <path className="st0" d="M200,206c-29.8,0-54-24.2-54-54s24.2-54,54-54s54,24.2,54,54S229.8,206,200,206z M200,110 c-23.2,0-42,18.8-42,42s18.8,42,42,42s42-18.8,42-42S223.2,110,200,110z" />
+      <path className="st0" d="M264,238h-40c-7.7,0-14-6.3-14-14v-26.7h12V224c0,1.1,0.9,2,2,2h40c1.1,0,2-0.9,2-2V72c0-1.1-0.9-2-2-2h-40 c-1.1,0-2,0.9-2,2v34.7h-12V72c0-7.7,6.3-14,14-14h40c7.7,0,14,6.3,14,14v152C278,231.7,271.7,238,264,238z" />
+      <path className="st1" d="M230,51h-12V40c0-7.7,6.3-14,14-14h24c7.7,0,14,6.3,14,14v9h-12v-9c0-1.1-0.9-2-2-2h-24c-1.1,0-2,0.9-2,2V51z" />
+      <path className="st0" d="M252.9,270h-17.9c-7,0-13-5.3-13.9-12.3l-3.1-25l11.9-1.5l3.1,25c0.1,1,1,1.8,2,1.8h17.9c1,0,1.9-0.8,2-1.8 l3.1-25l11.9,1.5l-3.1,25C266,264.7,260,270,252.9,270z" />
+      <rect className="st1" x="181.2" y="298" width="122.8" height="12" />
+      <path className="st0" d="M350,406H82v-31.8l16-24v-124c0-28.4,14-54.9,37.4-71l13.2-9l6.8,9.9l-13.2,9C122,178.9,110,201.8,110,226.2 v127.6l-16,24V394h244v-23.5L317.5,350h-144L154,330.5v-93.4c0-15.2,7.5-29.4,20-38l8.9-6.1l6.8,9.9l-8.9,6.1 c-9.3,6.3-14.8,16.8-14.8,28.1v88.4l12.5,12.5h144l27.5,27.5V406z" />
+    </svg>,
+
+  Tube: () =>
+  <svg width="48" height="48" viewBox="0 0 432 432">
+      <path className="st0" d="M304.6,116v6h44v-6h12v6h8V30h-84v92h8v-6H304.6z M296.6,42h60v68h-60V42z" />
+      <polygon className="st0" points="298.6,146 292.6,146 292.6,182 304.6,182 304.6,122 292.6,122 292.6,134 298.6,134 " />
+      <rect className="st0" x="292.6" y="116" width="12" height="6" />
+      <path className="st0" d="M282.7,291.1c-14.8,21.6-46.8,18.1-47.1,18.1l-2.9-0.3l-14.3,14.3l8.5,8.5l10.3-10.3 c3.8,0.2,10.8,0.2,18.8-1.3c16.1-3,28.7-10.7,36.6-22.2V276L282.7,291.1z" />
+      <path className="st0" d="M348.6,189.3v-7.2c-0.6,0-1.3-0.1-2-0.1h-42v6h-12v-6h-50v12h104c3.9,0,7,0.9,8.8,2.6c1.5,1.4,2.2,3.4,2.2,6 c0,16.7-20.7,27.3-35,27.3h-34.5l-12.8,12.8c-17.8,17.8-40.2,13.5-49,10.9l-3.5,11.5c4.4,1.3,11.6,3,20,3 c12.4,0,27.6-3.6,40.9-16.9l8.8-8.8V236h12v6h18c9.4,0,18.3-2.4,26-7v-12.4h12v2.3c5.7-6.8,9-14.8,9-22.3c0-5.9-2.1-11-6-14.8 c-0.8-0.8-1.8-1.6-3-2.3v3.7H348.6z" />
+      <rect className="st0" x="292.6" y="182" width="12" height="6" />
+      <path className="st0" d="M214.4,159.4c11.2-11.2,22.2-13.4,36.2-13.4h42v-12h-42c-14.4,0-29.8,2.1-44.7,17L126,230.9l8.5,8.5 L214.4,159.4z" />
+      <rect className="st0" x="292.6" y="134" width="6" height="12" />
+      <path className="st0" d="M348.6,182.1c5.4,0.3,9.2,1.8,12,3.5V122h-12V182.1z" />
+      <rect className="st0" x="348.6" y="116" width="12" height="6" />
+      <path className="st0" d="M348.6,189.3h12v-3.7c-2.8-1.7-6.6-3.2-12-3.5V189.3z" />
+      <path className="st0" d="M356.7,229c-2.5,2.3-5.2,4.3-8.1,6v8.6h12v-18.8C359.4,226.3,358.1,227.7,356.7,229z" />
+      <path className="st0" d="M304.6,364v-10h-6v-12h6V242h-11.5l-0.5,0.5V276l1-1.5l10,6.6l-11,16.8c0,0,0,0,0,0V364 c0,17.5,10.6,32.2,25,36.6v-12.9C310,383.6,304.6,374.5,304.6,364z" />
+      <path className="st0" d="M303.6,281l-10-6.6l-1,1.5v21.9c0,0,0,0,0,0L303.6,281z" />
+      <polygon className="st0" points="292.6,236 292.6,242.5 293.1,242 304.6,242 304.6,236 " />
+      <path className="st0" d="M348.6,222.6V235c2.9-1.7,5.6-3.7,8.1-6c1.4-1.3,2.7-2.7,3.9-4.1v-2.3H348.6z" />
+      <path className="st1" d="M348.6,364c0,14.3-9.9,26-22,26v12c18.7,0,34-17,34-38V252.7h-12V364z" />
+      <polygon className="st0" points="214.1,327.5 218.3,323.2 134.5,239.4 130.2,243.6 121.7,235.1 126,230.9 114.6,219.5 62.4,271.8 70.9,280.2 114.6,236.5 218.1,340 174.4,383.8 182.9,392.2 235.1,340 226.8,331.7 222.6,336 " />
+      <rect className="st0" x="217.5" y="323.6" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -168.4919 252.4059)" width="6" height="12" />
+      <rect className="st0" x="125.1" y="231.2" transform="matrix(0.707 -0.7072 0.7072 0.707 -130.2486 160.0984)" width="6" height="12" />
+      <rect className="st0" x="108.6" y="272.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -167.2499 164.2231)" width="12" height="22.6" />
+      <rect className="st0" x="304.6" y="342" width="26" height="12" />
+      <rect className="st0" x="298.6" y="342" width="6" height="12" />
+    </svg>,
+
+  Biopsy: () =>
+  <svg width="48" height="48" viewBox="0 0 432 432">
+      <path className="st0" d="M395.3,404.6c-0.3-0.6-8.3-13.7-11.5-19.6c-12.2-22.7-8.7-34.2-5.5-44.3c0.8-2.6,1.6-5.1,2.1-7.8 c2.3-12.7,0.1-65.2-1.6-73.1c-1.4-6.5-9.9-9-14.9-9.9l-1.9-0.3l-1.3-1.3c-6.1-6.1-14.2-9.8-21.2-9.8h-2.7l-1.8-2 c-7.6-8.4-17.1-9.7-25.5-10.9l-3.9-0.5l-1.5-2.5c-0.1-0.2-9.6-16.3-15-26c-0.5-0.4-2.8-1.3-6.6-0.6c-4.1,0.7-9.1,3.1-11.9,7.7 c1,6.4,2.5,15.2,4.4,26.7l0.1,0.8l-0.1,0.8c-0.8,9.4-5.6,60.3-5.7,60.8l-11.9-1.1c0-0.5,4.6-48.9,5.6-60c-2.1-12.4-3.6-21.6-4.6-28 l-0.3-1.8l0.8-1.6c4.9-10.8,16.2-16,25.3-16.4c7.2-0.3,12.8,2.2,15.4,6.8c4.1,7.3,10.6,18.4,13.5,23.4c8.6,1.2,19.6,3.3,29,12.6 c8.9,0.7,18.3,5,25.7,11.9c12.6,2.7,20.6,9.3,22.6,18.8c2,9.4,4.4,63.2,1.7,77.8c-0.6,3.4-1.5,6.3-2.4,9.2c-2.8,9-5.2,16.8,4.6,35 c3.1,5.7,11.1,19,11.2,19.1L395.3,404.6z" />
+      <path className="st0" d="M295.1,404.3l-8.4-15.7c-3.8-7.4-10-11-17.1-15.1c-7.1-4.1-15.1-8.7-21.7-17.8c-4.4-6.1-24.9-63-24.9-80.9h12 c0,14.4,19.1,68.5,22.7,73.9c5,6.9,11.3,10.6,18,14.4c8.1,4.7,16.4,9.5,21.8,20.1l8.3,15.6L295.1,404.3z" />
+      <path className="st0" d="M144.4,263.4c-65.1,0-118-52.9-118-118s52.9-118,118-118s118,52.9,118,118S209.5,263.4,144.4,263.4z M144.4,39.4c-58.4,0-106,47.6-106,106s47.6,106,106,106s106-47.6,106-106S202.9,39.4,144.4,39.4z" />
+      <rect className="st0" x="250.3" y="185.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -65.2344 239.3277)" width="12" height="25" />
+      <rect className="st0" x="236.3" y="219.1" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -106.718 244.9606)" width="12" height="64.5" />
+      <polygon className="st1" points="188.5,197.4 154.4,168.2 154.4,81.4 166.4,81.4 166.4,162.7 196.3,188.3 " />
+      <rect className="st1" x="197" y="144.6" transform="matrix(0.6508 -0.7593 0.7593 0.6508 -49.457 209.4883)" width="12" height="27.8" />
+      <polygon className="st1" points="100.4,197.4 92.6,188.3 122.4,162.7 122.4,81.4 134.4,81.4 134.4,168.2 " />
+      <rect className="st1" x="71.9" y="152.5" transform="matrix(0.7593 -0.6508 0.6508 0.7593 -82.4851 94.0361)" width="27.8" height="12" />
+    </svg>
+
+};
+
+const services = [
+{ id: "blood-draws", icon: <SvcIcon.Drop />, title: "Blood Draws", desc: "Stop in at our hospitals or clinics. Walk-in appointments are accepted; we welcome every patient — no appointment needed." },
+{ id: "lab-testing", icon: <SvcIcon.Microscope />, title: "Laboratory Testing", desc: "We perform comprehensive testing on blood and other specimens to help detect, monitor, and prevent a wide range of conditions." },
+{ id: "sample-collection", icon: <SvcIcon.Tube />, title: "Sample Collection", desc: "Urine, stool, and serum sample specimen drop-off options designed around your schedule." },
+{ id: "tissue-biopsy", icon: <SvcIcon.Biopsy />, title: "Tissue Biopsy Analysis", desc: "We perform comprehensive testing to detect and characterize benign and malignant tissue and preserve a wide range of conditions." }];
+
+
+const _unused_services = [
+{
+  num: "02",
+  title: "Comprehensive Laboratory Testing",
+  tags: ["CLIA-certified", "1,200+ tests"],
+  desc: "Hematology, clinical chemistry, immunology, microbiology, and molecular diagnostics performed in our Cedar Rapids reference lab. Results are reported directly to your ordering provider.",
+  bullets: [
+  "1,200+ assays available — common panels and specialty referrals",
+  "Internal QC monitored every shift; external proficiency tested quarterly",
+  "Stat orders processed within 60 minutes of receipt"],
+
+  meta: [
+  { label: "Accreditation", value: "CLIA, CAP, COLA" },
+  { label: "Reference range", value: "Reported with every result" }]
+
+},
+{
+  num: "03",
+  title: "Sample Collection & Drop-Off",
+  tags: ["Urine", "Stool", "Serum"],
+  desc: "Drop off urine, stool, and serum specimens at any of our four locations during open hours. We'll log, label, and route your sample to the correct department within minutes.",
+  bullets: [
+  "Specimen kits provided free at the front desk",
+  "After-hours drop boxes at Main Lab and Southwest",
+  "Chain-of-custody collection available for legal/employer testing"],
+
+  meta: [
+  { label: "Storage", value: "Refrigerated specimens accepted up to 48 hr post-collection" },
+  { label: "Cost", value: "No collection fee on physician-ordered specimens" }]
+
+},
+{
+  num: "04",
+  title: "Tissue Biopsy & Cytology",
+  tags: ["Histology", "Pap", "FNA"],
+  desc: "Histologic and cytologic analysis of biopsy specimens, fine-needle aspirates, and Pap smears. Reviewed by board-certified pathologists with reports delivered to your provider's EMR.",
+  bullets: [
+  "Surgical pathology, dermatopathology, and GI biopsies",
+  "Pap and HPV co-testing with reflex options",
+  "Second-opinion consultations available on request"],
+
+  meta: [
+  { label: "Turnaround", value: "2–5 business days for routine; 24 hr for stat" },
+  { label: "Reporting", value: "Direct EMR delivery and faxed copy" }]
+
+},
+{
+  num: "05",
+  title: "Wellness & Direct-Access Testing",
+  tags: ["No referral needed", "Self-pay"],
+  desc: "A small set of common screening panels available without a physician's order. Pay at the counter, get results to your inbox, and bring them to your next appointment.",
+  bullets: [
+  "Lipid panel, HbA1c, basic thyroid, vitamin D",
+  "Flat self-pay pricing — no insurance required",
+  "Results emailed in PDF format within 1–2 business days"],
+
+  meta: [
+  { label: "Pricing", value: "$29–$89 per panel" },
+  { label: "Locations", value: "Main Lab and Southwest" }]
+
+},
+{
+  num: "06",
+  title: "Provider & Hospital Reference Services",
+  tags: ["For providers", "EMR integration"],
+  desc: "We partner with regional clinics and hospitals as a reference lab — handling overflow, specialty assays, and after-hours testing with full EMR integration.",
+  bullets: [
+  "HL7 / FHIR result delivery to Epic, Cerner, and Athena",
+  "Dedicated client services team (Mon–Sat)",
+  "Same-day courier pickup throughout Linn and Johnson counties"],
+
+  meta: [
+  { label: "Onboarding", value: "Typically 2–3 weeks from contract" },
+  { label: "Contact", value: "providers@welandlabs.example" }]
+
+}];
+
+
+const providerServices = [
+  {
+    num: "01",
+    icon: "assets/weland-hospital-icon.svg",
+    title: "On-Site Collections",
+    body: "Weland Labs provides complimentary on-site blood collection for nursing homes and care facilities. With a scheduled appointment, a trained phlebotomist will come directly to your location to collect specimens for testing. Facilities can arrange visits for one or multiple patients by contacting the main laboratory.",
+    cta: "For more information or to schedule a service, please call ",
+    phone: "319.366.1503",
+  },
+  {
+    num: "02",
+    icon: "assets/weland-courier-icon.svg",
+    title: "Courier Services",
+    body: "We offer complimentary specimen pickup for nursing homes and care facilities throughout the week. Flexible courier services are available on both scheduled (daily or weekly) and on-demand bases to fit your facility's needs. For time-sensitive specimens or urgent pickups, expedited courier service is also available.",
+    cta: "To schedule service, please call ",
+    phone: "319.366.1503",
+  },
+  {
+    num: "03",
+    icon: "assets/weland-referral-icon.svg",
+    title: "Referrals",
+    body: "Weland Clinical Laboratories serves as a trusted local pathology and clinical lab partner for hospitals and medical clinics throughout the region. We provide off-site laboratory testing and pathology services to support facilities in need of additional diagnostic resources.",
+    cta: "To refer a hospital or clinic for pathology and clinical laboratory services, please contact Weland Clinical Laboratories at ",
+    phone: "319.366.1503",
+  },
+];
+
+
+function App() {
+  return (
+    <>
+      <ShellNav current="services" />
+      <main>
+        <PageHero
+          crumbs={[{ label: "Home", href: "index.html" }, { label: "Services" }]}
+          title="Lab services for Eastern Iowa."
+          lede="From routine bloodwork to specialty pathology — usually back to your provider the same day."
+          image="assets/services-hero.jpg"
+          imageAlt="Microscope examining specimen" />
+        
+
+        <section style={{ padding: "64px 0 0" }}>
+          <div className="container">
+            <p className="eyebrow" style={{ color: "var(--cyan)", marginBottom: 12 }}>What we do</p>
+            <h2 style={{ fontSize: "calc(30px * var(--text-scale, 1))", color: "var(--navy)", fontWeight: 700, margin: "0 0 36px", letterSpacing: "-0.015em" }}>Patient Services</h2>
+            <div className="services-grid">
+              {services.map((s, i) =>
+              <article key={i} id={s.id} className="service-card" tabIndex="0" style={{ scrollMarginTop: 100 }}>
+                  <div className="service-icon">{s.icon}</div>
+                  <h3>{s.title}</h3>
+                  <p>{s.desc}</p>
+                </article>
+              )}
+            </div>
+            <div style={{ marginTop: 36 }}>
+              <a href="FAQ.html" className="btn btn-primary btn-faq">Patient FAQs <IShell.Arrow /></a>
+            </div>
+          </div>
+        </section>
+
+        <section className="panels">
+          <div className="container">
+            <h2>Physicians, Hospitals &amp; Care Centers</h2>
+            <p className="lede">Weland Labs partners with healthcare providers to deliver fast, accurate, and dependable diagnostic services.</p>
+            <div className="panel-grid">
+              {providerServices.map((s) => (
+                <div className="panel-card" key={s.num}>
+                  <div className="panel-icon"><img src={s.icon} alt="" /></div>
+                  <h4>{s.title}</h4>
+                  <p>{s.body}</p>
+                  <a href={`tel:${s.phone.replace(/\./g, "")}`} className="btn btn-primary btn-faq panel-cta"><IShell.Phone /> Call for more information</a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+      </main>
+      <ShellFooter />
+    </>);
+
+}
+
+ReactDOM.createRoot(document.getElementById("app")).render(<App />);
+</script>
+</body>
+</html>
