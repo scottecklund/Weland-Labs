@@ -1,27 +1,14 @@
 // Renders a single blog post page (hero + body + sidebar of related posts).
 // Expects `currentSlug` global to be set on the page before this script runs.
+// Body content is now an HTML string (managed by CMS) rendered via dangerouslySetInnerHTML.
 
 function BlogPostBody({ post }) {
   return (
-    <div className="post-body">
-      {post.body.map((block, i) => {
-        if (block.kind === "h2") {
-          return <h2 key={i}>{block.text}</h2>;
-        }
-        if (block.kind === "ul") {
-          return (
-            <ul key={i}>
-              {block.items.map((it, j) => <li key={j}>{it}</li>)}
-            </ul>);
-
-        }
-        if (block.kind === "callout") {
-          return <aside key={i} className="post-callout">{block.text}</aside>;
-        }
-        return <p key={i}>{block.text}</p>;
-      })}
-    </div>);
-
+    <div
+      className="post-body"
+      dangerouslySetInnerHTML={{ __html: post.body }}
+    />
+  );
 }
 
 function PostSidebar({ currentSlug }) {
@@ -38,74 +25,63 @@ function PostSidebar({ currentSlug }) {
                 <span
                 className="sidebar-post-img"
                 style={{ backgroundImage: `url('${p.image}')` }}>
-              </span>
-                <span className="sidebar-post-meta">
+                </span>
+                <span className="sidebar-post-text">
                   <span className="sidebar-post-cat">{p.category}</span>
                   <span className="sidebar-post-title">{p.title}</span>
-                  <span className="sidebar-post-read">{p.read} <IShell.Arrow /></span>
                 </span>
               </a>
             </li>
           )}
         </ul>
-        <a href="Blog.html" className="sidebar-all">View all posts <IShell.Arrow /></a>
       </div>
-    </aside>);
-
+    </aside>
+  );
 }
 
 function BlogPostPage({ slug }) {
   const post = postBySlug(slug);
   if (!post) {
-    return <main><div className="container" style={{ padding: "80px 0" }}><p>Post not found.</p></div></main>;
+    return (
+      <div style={{ padding: "80px 32px", textAlign: "center" }}>
+        <p>Post not found.</p>
+      </div>
+    );
   }
   return (
-    <>
-      <ShellNav current="blog" />
-      <main>
-        <section className="post-hero">
-          <div className="container">
-            <p className="post-crumbs">
-              <a href="Blog.html">Blog</a>
-              <span>/</span>
-              <span>{post.category}</span>
-            </p>
-            <h1>{post.title}</h1>
+    <InteriorShell
+      pageId="blog-post"
+      title={post.title}
+      metaDesc={post.dek}
+      heroImage={post.image}
+      heroImageAlt={post.imageAlt}
+      heroOverlay={true}
+      crumbs={[
+        { label: "Home", href: "index.html" },
+        { label: "Blog", href: "Blog.html" },
+        { label: post.title }
+      ]}
+    >
+      <div className="post-layout">
+        <article className="post-article">
+          <header className="post-header">
+            <span className="post-category">{post.category}</span>
+            <h1 className="post-title">{post.title}</h1>
             <p className="post-dek">{post.dek}</p>
-          </div>
-        </section>
-
-        <section className="post-body-section">
-          <div className="container post-layout">
-            <article className="post-article">
-              <div
-                className="post-article-image"
-                style={{ backgroundImage: `url('${post.image}')` }}
-                role="img"
-                aria-label={post.imageAlt}>
-              </div>
-              <div className="post-article-inner">
-                <BlogPostBody post={post} />
-                <div className="post-share">
-                  <span className="post-share-label">Share</span>
-                  <a href="#" aria-label="Share on Facebook"><IShell.Facebook /></a>
-                  <a href="#" aria-label="Share on LinkedIn"><IShell.LinkedIn /></a>
-                  <a href={`mailto:?subject=${encodeURIComponent(post.title)}`} aria-label="Email">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="2" y="4" width="20" height="16" rx="2" />
-                      <polyline points="22 6 12 13 2 6" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </article>
-            <PostSidebar currentSlug={post.slug} />
-          </div>
-        </section>
-      </main>
-      <ShellFooter />
-    </>);
-
+            <div className="post-byline">
+              <span className="post-author">{post.author}</span>
+              <span className="post-dot">·</span>
+              <span className="post-role">{post.authorRole}</span>
+              <span className="post-dot">·</span>
+              <span className="post-date">{post.date}</span>
+              <span className="post-dot">·</span>
+              <span className="post-read">{post.read}</span>
+            </div>
+          </header>
+          <BlogPostBody post={post} />
+        </article>
+        <PostSidebar currentSlug={slug} />
+      </div>
+    </InteriorShell>
+  );
 }
-
-Object.assign(window, { BlogPostBody, PostSidebar, BlogPostPage });
