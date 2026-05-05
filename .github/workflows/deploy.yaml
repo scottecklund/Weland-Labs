@@ -1,0 +1,40 @@
+# .github/workflows/deploy.yml
+# Auto-deploys to weland.devlink.info via FTP on every push to main
+# Uses delta sync — only changed files are uploaded after the first run
+
+name: Deploy to weland.devlink.info
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: FTP Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Pull down the latest code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Deploy via FTP — excludes dev-only folders
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          local-dir: ./
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            scraps/**
+            screenshots/**
+            uploads/**
+            README.md
+            *.jsx
