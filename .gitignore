@@ -1,0 +1,11 @@
+# Dev/scratch folders — not deployed
+scraps/
+screenshots/
+uploads/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# FTP deploy state file (auto-generated on first deploy)
+.ftp-deploy-sync-state.json
