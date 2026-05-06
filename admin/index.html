@@ -307,6 +307,14 @@ hr{border:none;border-top:1px solid var(--border);margin:20px 0}
         Media Library
       </div>
       <div class="sb-section" style="margin-top:8px">System</div>
+      <div class="nav-item" data-panel="pages" onclick="switchPanel('pages',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="0"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        Pages
+      </div>
+      <div class="nav-item" data-panel="plugins" onclick="switchPanel('plugins',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>
+        Plugins
+      </div>
       <div class="nav-item" data-panel="settings" onclick="switchPanel('settings',this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         Settings
@@ -451,6 +459,120 @@ hr{border:none;border-top:1px solid var(--border);margin:20px 0}
       </div>
     </div>
 
+    <!-- PAGES PANEL -->
+    <div class="panel" id="panel-pages">
+      <div class="info-banner" style="margin-bottom:20px"><strong>Homepage content</strong> is managed here. Changes save to <code>data/content.json</code> in your GitHub repo and deploy automatically. Interior page editing (About, Services, FAQ, etc.) is coming in the next update.</div>
+
+      <!-- Section tabs -->
+      <div style="display:flex;gap:2px;margin-bottom:24px;border-bottom:2px solid var(--border)">
+        <button class="pg-tab active" data-sec="hero"      onclick="pgTab('hero',this)"     style="padding:10px 18px;background:none;border:none;font-family:inherit;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;letter-spacing:.04em;text-transform:uppercase">Hero</button>
+        <button class="pg-tab"        data-sec="services"  onclick="pgTab('services',this)"  style="padding:10px 18px;background:none;border:none;font-family:inherit;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;letter-spacing:.04em;text-transform:uppercase">Services</button>
+        <button class="pg-tab"        data-sec="testing"   onclick="pgTab('testing',this)"   style="padding:10px 18px;background:none;border:none;font-family:inherit;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;letter-spacing:.04em;text-transform:uppercase">About Section</button>
+        <button class="pg-tab"        data-sec="locations" onclick="pgTab('locations',this)" style="padding:10px 18px;background:none;border:none;font-family:inherit;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;letter-spacing:.04em;text-transform:uppercase">Locations</button>
+        <button class="pg-tab"        data-sec="ctaBand"   onclick="pgTab('ctaBand',this)"   style="padding:10px 18px;background:none;border:none;font-family:inherit;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;letter-spacing:.04em;text-transform:uppercase">CTA Band</button>
+      </div>
+
+      <!-- HERO -->
+      <div class="pg-sec active" id="pg-hero">
+        <div class="card">
+          <div class="card-head"><h2>Hero Section</h2><button class="btn btn-green btn-sm" onclick="savePageSection('hero')">Save & Publish</button></div>
+          <div class="card-body">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+              <div class="form-group"><label>Eyebrow Text</label><input type="text" id="pg-hero-eyebrow"></div>
+              <div class="form-group"><label>Heading Line 1</label><input type="text" id="pg-hero-heading1"></div>
+              <div class="form-group"><label>Heading Line 2</label><input type="text" id="pg-hero-heading2"></div>
+              <div class="form-group"><label>CTA Button 1 Text</label><input type="text" id="pg-hero-cta1Text"></div>
+              <div class="form-group"><label>CTA Button 1 URL</label><input type="text" id="pg-hero-cta1Href"></div>
+              <div class="form-group"><label>CTA Button 2 Text</label><input type="text" id="pg-hero-cta2Text"></div>
+              <div class="form-group"><label>CTA Button 2 URL</label><input type="text" id="pg-hero-cta2Href"></div>
+            </div>
+            <div class="form-group"><label>Body Paragraph</label><textarea id="pg-hero-body" rows="4"></textarea></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERVICES -->
+      <div class="pg-sec" id="pg-services" style="display:none">
+        <div class="card">
+          <div class="card-head"><h2>Services Section</h2><button class="btn btn-green btn-sm" onclick="savePageSection('services')">Save & Publish</button></div>
+          <div class="card-body">
+            <div class="form-group"><label>Section Heading</label><input type="text" id="pg-services-heading"></div>
+            <div id="pg-services-items"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TESTING / ABOUT -->
+      <div class="pg-sec" id="pg-testing" style="display:none">
+        <div class="card">
+          <div class="card-head"><h2>About / Testing Section</h2><button class="btn btn-green btn-sm" onclick="savePageSection('testing')">Save & Publish</button></div>
+          <div class="card-body">
+            <div class="form-group"><label>Heading</label><input type="text" id="pg-testing-heading"></div>
+            <div class="form-group"><label>Body Paragraph</label><textarea id="pg-testing-body" rows="4"></textarea></div>
+            <div class="form-group"><label>Bullet Points <small style="font-weight:400;text-transform:none;letter-spacing:0">(one per line)</small></label><textarea id="pg-testing-bullets" rows="6"></textarea></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+              <div class="form-group"><label>CTA Text</label><input type="text" id="pg-testing-ctaText"></div>
+              <div class="form-group"><label>CTA URL</label><input type="text" id="pg-testing-ctaHref"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LOCATIONS -->
+      <div class="pg-sec" id="pg-locations" style="display:none">
+        <div class="card">
+          <div class="card-head"><h2>Locations Section</h2><button class="btn btn-green btn-sm" onclick="savePageSection('locations')">Save & Publish</button></div>
+          <div class="card-body">
+            <div class="form-group"><label>Section Heading</label><input type="text" id="pg-locations-heading"></div>
+            <div id="pg-locations-items"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA BAND -->
+      <div class="pg-sec" id="pg-ctaBand" style="display:none">
+        <div class="card">
+          <div class="card-head"><h2>CTA Band</h2><button class="btn btn-green btn-sm" onclick="savePageSection('ctaBand')">Save & Publish</button></div>
+          <div class="card-body">
+            <div class="form-group"><label>Heading</label><input type="text" id="pg-ctaBand-heading"></div>
+            <div class="form-group"><label>Body Text</label><textarea id="pg-ctaBand-body" rows="3"></textarea></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px">
+              <div class="form-group"><label>Button 1 Text</label><input type="text" id="pg-ctaBand-cta1Text"></div>
+              <div class="form-group"><label>Button 1 URL</label><input type="text" id="pg-ctaBand-cta1Href"></div>
+              <div class="form-group"><label>Button 2 Text</label><input type="text" id="pg-ctaBand-cta2Text"></div>
+              <div class="form-group"><label>Button 2 URL</label><input type="text" id="pg-ctaBand-cta2Href"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLUGINS PANEL -->
+    <div class="panel" id="panel-plugins">
+
+      <!-- Library -->
+      <div class="card" style="margin-bottom:20px">
+        <div class="card-head"><h2>Plugin Library</h2><small style="color:var(--muted);font-size:12px">Click any card to install</small></div>
+        <div class="card-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px" id="plugin-library"></div>
+        </div>
+      </div>
+
+      <!-- Installed -->
+      <div class="card">
+        <div class="card-head">
+          <h2>Installed Plugins</h2>
+          <button class="btn btn-cyan btn-sm" onclick="openPluginEditor(null)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Custom Code
+          </button>
+        </div>
+        <div class="card-body" id="plugins-list">
+          <div class="empty"><span>🔌</span><h3>No plugins installed</h3><p>Install from the library above or add custom code.</p></div>
+        </div>
+      </div>
+    </div>
+
     <!-- SETTINGS PANEL -->
     <div class="panel" id="panel-settings">
       <div class="settings-block">
@@ -491,6 +613,41 @@ hr{border:none;border-top:1px solid var(--border);margin:20px 0}
 
   </div><!-- /main -->
 </div><!-- /app-shell -->
+
+<!-- PLUGIN EDITOR MODAL -->
+<div class="modal-wrap" id="plugin-modal">
+  <div class="modal" style="width:600px">
+    <div class="modal-head">
+      <h2 id="plug-modal-title">Add Plugin</h2>
+      <button class="btn-icon" onclick="document.getElementById('plugin-modal').classList.remove('open')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+        <div class="form-group" style="margin-bottom:0"><label>Plugin Name</label><input type="text" id="plug-name" placeholder="e.g. Google Analytics 4"></div>
+        <div class="form-group" style="margin-bottom:0">
+          <label>Inject Location</label>
+          <select id="plug-location">
+            <option value="head">Head (before &lt;/head&gt;)</option>
+            <option value="body-start">Body Start (after &lt;body&gt;)</option>
+            <option value="body-end">Body End (before &lt;/body&gt;)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:12px">
+        <label>Code <small style="font-weight:400;text-transform:none;letter-spacing:0">— paste any HTML, &lt;script&gt;, or &lt;style&gt; tag</small></label>
+        <textarea id="plug-code" rows="12" style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;line-height:1.6;background:#f8fafc"></textarea>
+      </div>
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:600;color:var(--navy)">
+        <input type="checkbox" id="plug-active" checked style="width:16px;height:16px;accent-color:var(--green)">
+        Active (inject on all pages)
+      </label>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('plugin-modal').classList.remove('open')">Cancel</button>
+      <button class="btn btn-green btn-sm" onclick="savePlugin()">Save Plugin</button>
+    </div>
+  </div>
+</div>
 
 <!-- CONFIRM MODAL -->
 <div class="modal-wrap" id="confirm-modal">
@@ -574,7 +731,7 @@ function switchPanel(id, el) {
   document.getElementById('panel-' + id).classList.add('active');
   el.classList.add('active');
 
-  const titles = { dashboard:'Dashboard', posts:'Blog Posts', media:'Media Library', settings:'Settings' };
+  const titles = { dashboard:'Dashboard', posts:'Blog Posts', media:'Media Library', settings:'Settings', pages:'Pages', plugins:'Plugins' };
   document.getElementById('panel-title').textContent = titles[id] || id;
 
   const actions = document.getElementById('header-actions');
@@ -1022,8 +1179,326 @@ async function handleFiles(files) {
 }
 
 // ═══════════════════════════════════════════════
-// SETTINGS
+// PAGES
 // ═══════════════════════════════════════════════
+const CONTENT_PATH = 'data/content.json';
+let _content = {};
+let _contentSHA = null;
+
+function pgTab(sec, el) {
+  document.querySelectorAll('.pg-tab').forEach(t => { t.style.color = 'var(--muted)'; t.style.borderBottomColor = 'transparent'; });
+  document.querySelectorAll('.pg-sec').forEach(s => s.style.display = 'none');
+  el.style.color = 'var(--navy)';
+  el.style.borderBottomColor = 'var(--cyan)';
+  document.getElementById('pg-' + sec).style.display = 'block';
+}
+
+async function loadPageContent() {
+  try {
+    const { content, sha } = await ghRead(CONTENT_PATH);
+    _content = JSON.parse(content);
+    _contentSHA = sha;
+    populatePageForms();
+  } catch(e) {
+    toast('Could not load content.json: ' + e.message, 'err');
+  }
+}
+
+function populatePageForms() {
+  const c = _content;
+  // Hero
+  const h = c.hero || {};
+  setVal('pg-hero-eyebrow', h.eyebrow);
+  setVal('pg-hero-heading1', h.heading1);
+  setVal('pg-hero-heading2', h.heading2);
+  setVal('pg-hero-body', h.body);
+  setVal('pg-hero-cta1Text', h.cta1Text);
+  setVal('pg-hero-cta1Href', h.cta1Href);
+  setVal('pg-hero-cta2Text', h.cta2Text);
+  setVal('pg-hero-cta2Href', h.cta2Href);
+
+  // Services
+  const sv = c.services || {};
+  setVal('pg-services-heading', sv.heading);
+  renderServiceItems(sv.items || []);
+
+  // Testing
+  const t = c.testing || {};
+  setVal('pg-testing-heading', t.heading);
+  setVal('pg-testing-body', t.body);
+  setVal('pg-testing-bullets', (t.bullets || []).join('\n'));
+  setVal('pg-testing-ctaText', t.ctaText);
+  setVal('pg-testing-ctaHref', t.ctaHref);
+
+  // Locations
+  const lo = c.locations || {};
+  setVal('pg-locations-heading', lo.heading);
+  renderLocationItems(lo.items || []);
+
+  // CTA Band
+  const cb = c.ctaBand || {};
+  setVal('pg-ctaBand-heading', cb.heading);
+  setVal('pg-ctaBand-body', cb.body);
+  setVal('pg-ctaBand-cta1Text', cb.cta1Text);
+  setVal('pg-ctaBand-cta1Href', cb.cta1Href);
+  setVal('pg-ctaBand-cta2Text', cb.cta2Text);
+  setVal('pg-ctaBand-cta2Href', cb.cta2Href);
+}
+
+function setVal(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.value = val || '';
+}
+
+function getVal(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
+
+function renderServiceItems(items) {
+  const wrap = document.getElementById('pg-services-items');
+  wrap.innerHTML = items.map((item, i) => `
+    <div style="background:var(--bg);padding:14px;margin-bottom:10px">
+      <div style="font-size:10px;font-weight:800;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">Service ${i+1}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="form-group" style="margin-bottom:8px"><label>Title</label><input type="text" id="svc-title-${i}" value="${escHtml(item.title||'')}"></div>
+        <div class="form-group" style="margin-bottom:8px"><label>Link URL</label><input type="text" id="svc-href-${i}" value="${escHtml(item.href||'')}"></div>
+      </div>
+      <div class="form-group" style="margin-bottom:0"><label>Description</label><textarea id="svc-desc-${i}" rows="2">${escHtml(item.desc||'')}</textarea></div>
+    </div>
+  `).join('');
+}
+
+function renderLocationItems(items) {
+  const wrap = document.getElementById('pg-locations-items');
+  wrap.innerHTML = items.map((loc, i) => `
+    <div style="background:var(--bg);padding:14px;margin-bottom:10px">
+      <div style="font-size:10px;font-weight:800;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">${escHtml(loc.name||'Location '+(i+1))}</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+        <div class="form-group" style="margin-bottom:8px"><label>Name</label><input type="text" id="loc-name-${i}" value="${escHtml(loc.name||'')}"></div>
+        <div class="form-group" style="margin-bottom:8px"><label>Address</label><input type="text" id="loc-address-${i}" value="${escHtml(loc.address||'')}"></div>
+        <div class="form-group" style="margin-bottom:8px"><label>City, State ZIP</label><input type="text" id="loc-city-${i}" value="${escHtml(loc.city||'')}"></div>
+        <div class="form-group" style="margin-bottom:8px"><label>Weekday Hours</label><input type="text" id="loc-weekday-${i}" value="${escHtml(loc.weekday||'')}"></div>
+        <div class="form-group" style="margin-bottom:8px"><label>Saturday Hours</label><input type="text" id="loc-sat-${i}" value="${escHtml(loc.sat||'')}"></div>
+        <div class="form-group" style="margin-bottom:8px"><label>Sunday Hours</label><input type="text" id="loc-sun-${i}" value="${escHtml(loc.sun||'')}"></div>
+        <div class="form-group" style="margin-bottom:0"><label>Phone 1</label><input type="text" id="loc-phone1-${i}" value="${escHtml(loc.phone1||'')}"></div>
+        <div class="form-group" style="margin-bottom:0"><label>Phone 2</label><input type="text" id="loc-phone2-${i}" value="${escHtml(loc.phone2||'')}"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function savePageSection(section) {
+  if (!_content) _content = {};
+  if (section === 'hero') {
+    _content.hero = {
+      eyebrow: getVal('pg-hero-eyebrow'), heading1: getVal('pg-hero-heading1'),
+      heading2: getVal('pg-hero-heading2'), body: getVal('pg-hero-body'),
+      cta1Text: getVal('pg-hero-cta1Text'), cta1Href: getVal('pg-hero-cta1Href'),
+      cta2Text: getVal('pg-hero-cta2Text'), cta2Href: getVal('pg-hero-cta2Href'),
+    };
+  } else if (section === 'services') {
+    const items = (_content.services && _content.services.items) || [];
+    _content.services = {
+      heading: getVal('pg-services-heading'),
+      items: items.map((_, i) => ({
+        ...items[i],
+        title: document.getElementById('svc-title-'+i)?.value.trim() || '',
+        desc:  document.getElementById('svc-desc-'+i)?.value.trim() || '',
+        href:  document.getElementById('svc-href-'+i)?.value.trim() || '',
+      }))
+    };
+  } else if (section === 'testing') {
+    _content.testing = {
+      heading: getVal('pg-testing-heading'), body: getVal('pg-testing-body'),
+      bullets: getVal('pg-testing-bullets').split('\n').map(s=>s.trim()).filter(Boolean),
+      ctaText: getVal('pg-testing-ctaText'), ctaHref: getVal('pg-testing-ctaHref'),
+    };
+  } else if (section === 'locations') {
+    const items = (_content.locations && _content.locations.items) || [];
+    _content.locations = {
+      heading: getVal('pg-locations-heading'),
+      items: items.map((loc, i) => ({
+        id: loc.id,
+        name:    document.getElementById('loc-name-'+i)?.value.trim() || loc.name,
+        address: document.getElementById('loc-address-'+i)?.value.trim() || '',
+        city:    document.getElementById('loc-city-'+i)?.value.trim() || '',
+        weekday: document.getElementById('loc-weekday-'+i)?.value.trim() || '',
+        sat:     document.getElementById('loc-sat-'+i)?.value.trim() || '',
+        sun:     document.getElementById('loc-sun-'+i)?.value.trim() || '',
+        phone1:  document.getElementById('loc-phone1-'+i)?.value.trim() || '',
+        phone2:  document.getElementById('loc-phone2-'+i)?.value.trim() || '',
+      }))
+    };
+  } else if (section === 'ctaBand') {
+    _content.ctaBand = {
+      heading: getVal('pg-ctaBand-heading'), body: getVal('pg-ctaBand-body'),
+      cta1Text: getVal('pg-ctaBand-cta1Text'), cta1Href: getVal('pg-ctaBand-cta1Href'),
+      cta2Text: getVal('pg-ctaBand-cta2Text'), cta2Href: getVal('pg-ctaBand-cta2Href'),
+    };
+  }
+  toast('Saving…');
+  try {
+    const result = await ghWrite(CONTENT_PATH, JSON.stringify(_content, null, 2), _contentSHA, `CMS: update ${section}`);
+    _contentSHA = result.content.sha;
+    toast('Saved & deploying!', 'ok');
+  } catch(e) {
+    toast('Save failed: ' + e.message, 'err');
+  }
+}
+
+// ═══════════════════════════════════════════════
+// PLUGINS
+// ═══════════════════════════════════════════════
+const INJECT_PATH = 'data/injections.json';
+let _injections = [];
+let _injSHA = null;
+
+const PLUGIN_LIBRARY = [
+  { name: 'Google Analytics 4', icon: '📊', location: 'head', desc: 'GA4 page tracking', template: (id) => `<script async src="https://www.googletagmanager.com/gtag/js?id=${id}"><\/script>\n<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${id}');<\/script>`, prompt: 'Measurement ID (G-XXXXXXXXXX)' },
+  { name: 'Google Tag Manager', icon: '🏷️', location: 'head', desc: 'GTM container', template: (id) => `<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${id}');<\/script>`, prompt: 'GTM Container ID (GTM-XXXXXXX)' },
+  { name: 'Facebook Pixel', icon: '📘', location: 'head', desc: 'Meta Pixel tracking', template: (id) => `<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${id}');fbq('track','PageView');<\/script>`, prompt: 'Facebook Pixel ID' },
+  { name: 'Hotjar', icon: '🔥', location: 'head', desc: 'Heatmaps & session recording', template: (id) => `<script>(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:${id},hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');<\/script>`, prompt: 'Hotjar Site ID (numeric)' },
+  { name: 'Tidio Chat', icon: '💬', location: 'body-end', desc: 'Live chat widget', template: (id) => `<script src="//code.tidio.co/${id}.js" async><\/script>`, prompt: 'Tidio Public Key' },
+  { name: 'Crisp Chat', icon: '🗨️', location: 'body-end', desc: 'Crisp live chat', template: (id) => `<script>window.$crisp=[];window.CRISP_WEBSITE_ID="${id}";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();<\/script>`, prompt: 'Crisp Website ID' },
+  { name: 'Cookie Banner', icon: '🍪', location: 'body-end', desc: 'Simple GDPR cookie notice', template: () => `<div id="cookie-notice" style="position:fixed;bottom:0;left:0;right:0;background:#052942;color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;z-index:9999;font-family:inherit;font-size:13px"><span>We use cookies to improve your experience. <a href="#" style="color:#45BBEC">Learn more</a></span><button onclick="document.getElementById('cookie-notice').remove();localStorage.setItem('cookies','ok')" style="background:#45BBEC;color:#fff;border:none;padding:7px 16px;font-family:inherit;font-weight:700;cursor:pointer">Accept</button></div><script>if(localStorage.getItem('cookies')==='ok')document.getElementById('cookie-notice').remove();<\/script>`, prompt: null },
+  { name: 'Custom Code', icon: '⚡', location: 'head', desc: 'Paste any HTML/JS/CSS', template: () => '', prompt: null },
+];
+
+async function loadPlugins() {
+  try {
+    const { content, sha } = await ghRead(INJECT_PATH);
+    _injections = JSON.parse(content);
+    _injSHA = sha;
+  } catch(e) {
+    _injections = [];
+    _injSHA = null;
+  }
+  renderPluginLibrary();
+  renderPluginsList();
+}
+
+function renderPluginLibrary() {
+  const wrap = document.getElementById('plugin-library');
+  wrap.innerHTML = PLUGIN_LIBRARY.map((p, i) => `
+    <div onclick="installPlugin(${i})" style="background:var(--bg);border:1.5px solid var(--border);padding:14px;cursor:pointer;transition:border-color .15s" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'">
+      <div style="font-size:22px;margin-bottom:6px">${p.icon}</div>
+      <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:2px">${p.name}</div>
+      <div style="font-size:11px;color:var(--muted)">${p.desc}</div>
+    </div>
+  `).join('');
+}
+
+function renderPluginsList() {
+  const wrap = document.getElementById('plugins-list');
+  if (!_injections.length) {
+    wrap.innerHTML = '<div class="empty"><span>🔌</span><h3>No plugins installed</h3><p>Install from the library above or add custom code.</p></div>';
+    return;
+  }
+  const locLabel = { head: 'Head', 'body-start': 'Body Start', 'body-end': 'Body End' };
+  wrap.innerHTML = `
+    <table class="posts-table">
+      <thead><tr><th>Status</th><th>Name</th><th>Location</th><th></th></tr></thead>
+      <tbody>
+        ${_injections.map((inj, i) => `
+          <tr>
+            <td>
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer">
+                <input type="checkbox" ${inj.active !== false ? 'checked' : ''} onchange="togglePlugin(${i},this.checked)" style="width:16px;height:16px;accent-color:var(--green)">
+                <span style="font-size:11px;color:${inj.active !== false ? 'var(--green)' : 'var(--muted)'}">${inj.active !== false ? 'On' : 'Off'}</span>
+              </label>
+            </td>
+            <td class="post-title-cell">${escHtml(inj.name)}</td>
+            <td><span class="badge badge-blue">${locLabel[inj.location] || inj.location}</span></td>
+            <td style="display:flex;gap:6px">
+              <button class="btn btn-ghost btn-sm" onclick="openPluginEditor(${i})">Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="deletePlugin(${i})">Delete</button>
+            </td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+function installPlugin(libIdx) {
+  const lib = PLUGIN_LIBRARY[libIdx];
+  if (lib.prompt) {
+    const val = prompt(`${lib.name}\n\nEnter your ${lib.prompt}:`);
+    if (!val) return;
+    const code = lib.template(val.trim());
+    openPluginEditor(null, { name: lib.name, location: lib.location, code, active: true });
+  } else {
+    const code = lib.template();
+    openPluginEditor(null, { name: lib.name, location: lib.location, code, active: true });
+  }
+}
+
+let _editingPluginIdx = null;
+
+function openPluginEditor(idx, prefill) {
+  _editingPluginIdx = idx;
+  const inj = idx !== null ? _injections[idx] : (prefill || { name: '', location: 'head', code: '', active: true });
+  document.getElementById('plug-name').value    = inj.name || '';
+  document.getElementById('plug-location').value= inj.location || 'head';
+  document.getElementById('plug-code').value    = inj.code || '';
+  document.getElementById('plug-active').checked= inj.active !== false;
+  document.getElementById('plug-modal-title').textContent = idx !== null ? 'Edit Plugin' : 'Add Plugin';
+  document.getElementById('plugin-modal').classList.add('open');
+}
+
+async function savePlugin() {
+  const inj = {
+    name:     document.getElementById('plug-name').value.trim(),
+    location: document.getElementById('plug-location').value,
+    code:     document.getElementById('plug-code').value,
+    active:   document.getElementById('plug-active').checked,
+  };
+  if (!inj.name) { toast('Plugin name is required', 'err'); return; }
+  if (_editingPluginIdx !== null) {
+    _injections[_editingPluginIdx] = inj;
+  } else {
+    _injections.push(inj);
+  }
+  document.getElementById('plugin-modal').classList.remove('open');
+  await commitPlugins(`CMS: ${_editingPluginIdx !== null ? 'update' : 'add'} plugin "${inj.name}"`);
+}
+
+async function togglePlugin(idx, active) {
+  _injections[idx].active = active;
+  await commitPlugins(`CMS: toggle plugin "${_injections[idx].name}" ${active ? 'on' : 'off'}`);
+}
+
+async function deletePlugin(idx) {
+  const name = _injections[idx].name;
+  if (!confirm(`Delete "${name}"?`)) return;
+  _injections.splice(idx, 1);
+  await commitPlugins(`CMS: delete plugin "${name}"`);
+}
+
+async function commitPlugins(message) {
+  toast('Saving…');
+  try {
+    const result = await ghWrite(INJECT_PATH, JSON.stringify(_injections, null, 2), _injSHA, message);
+    _injSHA = result.content.sha;
+    renderPluginsList();
+    toast('Saved & deploying!', 'ok');
+  } catch(e) {
+    toast('Save failed: ' + e.message, 'err');
+  }
+}
+
+// ─ patch switchPanel to handle new panels ─
+const _origSwitch = switchPanel;
+switchPanel = function(id, el) {
+  _origSwitch(id, el);
+  if (id === 'pages')   { loadPageContent(); }
+  if (id === 'plugins') { loadPlugins(); }
+};
+
+// ─ update panel titles map ─
+const _origTitles = { dashboard:'Dashboard', posts:'Blog Posts', media:'Media Library', settings:'Settings' };
+
 function loadSettingsForm() {
   const cfg = getGHConfig();
   document.getElementById('s-repo').value   = cfg.repo;
