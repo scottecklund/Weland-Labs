@@ -1,0 +1,50 @@
+{
+  "hero": {
+    "eyebrow": "No appointment needed",
+    "heading1": "Precision Testing.",
+    "heading2": "Personal Care.",
+    "body": "For over 50 years, Weland Labs has delivered accurate, timely, and compassionate diagnostic testing to patients, physicians, and healthcare systems across Eastern Iowa. With advanced technology, experienced professionals, and a commitment to efficiency, we make lab testing simple, accessible, and reliable.",
+    "cta1Text": "Services",
+    "cta1Href": "Services.html",
+    "cta2Text": "Locations",
+    "cta2Href": "Locations.html"
+  },
+  "services": {
+    "heading": "Comprehensive Lab Services",
+    "items": [
+      { "title": "Blood Draws", "desc": "Stop in at our hospitals or clinics. Walk-in appointments are accepted; we welcome every patient — no appointment needed.", "href": "Services.html#blood-draws" },
+      { "title": "Laboratory Testing", "desc": "We perform comprehensive testing on blood and other specimens to help detect, monitor, and prevent a wide range of conditions.", "href": "Services.html#lab-testing" },
+      { "title": "Sample Collection", "desc": "Urine, stool, and serum sample specimen drop-off options designed around your schedule.", "href": "Services.html#sample-collection" },
+      { "title": "Tissue Biopsy Analysis", "desc": "We perform comprehensive testing to detect and characterize benign and malignant tissue and preserve a wide range of conditions.", "href": "Services.html#tissue-biopsy" }
+    ]
+  },
+  "testing": {
+    "heading": "Accurate testing. Clear answers.",
+    "body": "Weland Labs provides a full range of diagnostic services for patients referred by hospitals, clinics, and healthcare providers. From routine screenings to specialized analyses, our team delivers fast, reliable results to support confident clinical decisions.",
+    "bullets": [
+      "Fast turnaround times so you and your provider can act quickly",
+      "Convenient access with multiple locations and walk-in availability",
+      "Lower out-of-pocket costs compared to many hospital systems",
+      "Efficient visits — most patients are in and out in under 20 minutes"
+    ],
+    "ctaText": "Read more",
+    "ctaHref": "#"
+  },
+  "locations": {
+    "heading": "Four Convenient Locations",
+    "items": [
+      { "id": "main",      "name": "Main Lab",     "address": "1311 1st Avenue SE",   "city": "Cedar Rapids, IA 52402", "weekday": "Mon–Fri: 6am–6pm", "sat": "Sat: 8am–noon", "sun": "Sun: Closed", "phone1": "319.555.1411", "phone2": "1.800.728.7203" },
+      { "id": "czech",     "name": "Czech Square", "address": "84 16th Avenue SW",    "city": "Cedar Rapids, IA 52404", "weekday": "Mon–Fri: 7am–5pm", "sat": "Sat: 8am–noon", "sun": "Sun: Closed", "phone1": "319.555.2102", "phone2": "1.800.728.7203" },
+      { "id": "southwest", "name": "Southwest",    "address": "2421 Edgewood Rd SW",  "city": "Cedar Rapids, IA 52404", "weekday": "Mon–Fri: 6am–6pm", "sat": "Sat: 8am–noon", "sun": "Sun: Closed", "phone1": "319.555.3344", "phone2": "1.800.728.7203" },
+      { "id": "marion",    "name": "Marion",        "address": "2300 Blairs Ferry Rd", "city": "Marion, IA 52302",       "weekday": "Mon–Fri: 7am–5pm", "sat": "Sat: Closed",   "sun": "Sun: Closed", "phone1": "319.555.7788", "phone2": "1.800.728.7203" }
+    ]
+  },
+  "ctaBand": {
+    "heading": "Need a test today?",
+    "body": "Walk in to any of our four locations during open hours, or call ahead if you'd like us to confirm prep instructions for your specific test.",
+    "cta1Text": "Find a location",
+    "cta1Href": "Locations.html",
+    "cta2Text": "Contact us",
+    "cta2Href": "Contact.html"
+  }
+}
