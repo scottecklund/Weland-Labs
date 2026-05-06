@@ -1,4 +1,59 @@
-// Weland Labs — interactive homepage
+// ── INJECTION LOADER ──
+(function() {
+  function execNodes(html, target, prepend) {
+    var tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    Array.from(tmp.childNodes).forEach(function(node) {
+      var clone;
+      if (node.nodeType === 1 && node.tagName === 'SCRIPT') {
+        clone = document.createElement('script');
+        Array.from(node.attributes).forEach(function(a) { clone.setAttribute(a.name, a.value); });
+        clone.textContent = node.textContent;
+      } else {
+        clone = node.cloneNode(true);
+      }
+      if (prepend && target.firstChild) { target.insertBefore(clone, target.firstChild); }
+      else { target.appendChild(clone); }
+    });
+  }
+  try {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'data/injections.json', false);
+    xhr.send();
+    if (xhr.status !== 200) return;
+    JSON.parse(xhr.responseText)
+      .filter(function(i) { return i.active !== false; })
+      .forEach(function(inj) {
+        if (inj.location === 'head') { execNodes(inj.code, document.head, false); }
+        else if (inj.location === 'body-start') { document.addEventListener('DOMContentLoaded', function() { execNodes(inj.code, document.body, true); }); }
+        else { document.addEventListener('DOMContentLoaded', function() { execNodes(inj.code, document.body, false); }); }
+      });
+  } catch(e) {}
+})();
+
+// ── CONTENT LOADER ──
+// Loads editable content from data/content.json (managed by CMS).
+// Falls back to hardcoded defaults if the file is missing or fails to load.
+var _cms = {};
+try {
+  var _cxhr = new XMLHttpRequest();
+  _cxhr.open('GET', 'data/content.json', false);
+  _cxhr.send();
+  if (_cxhr.status === 200) _cms = JSON.parse(_cxhr.responseText);
+} catch(e) {}
+
+// Helper: safely read a dot-path from _cms with a fallback value
+function _c(path, fallback) {
+  var parts = path.split('.');
+  var val = _cms;
+  for (var i = 0; i < parts.length; i++) {
+    if (val == null || typeof val !== 'object') return fallback;
+    val = val[parts[i]];
+  }
+  return (val !== undefined && val !== null) ? val : fallback;
+}
+
+// ── MAIN APP ──
 const { useState, useEffect, useRef } = React;
 
 // ===== ICONS =====
@@ -25,39 +80,18 @@ const Icon = {
       <path className="st0" d="M304.6,116v6h44v-6h12v6h8V30h-84v92h8v-6H304.6z M296.6,42h60v68h-60V42z"/>
       <polygon className="st0" points="298.6,146 292.6,146 292.6,182 304.6,182 304.6,122 292.6,122 292.6,134 298.6,134 "/>
       <rect className="st0" x="292.6" y="116" width="12" height="6"/>
-      <path className="st0" d="M282.7,291.1c-14.8,21.6-46.8,18.1-47.1,18.1l-2.9-0.3l-14.3,14.3l8.5,8.5l10.3-10.3 c3.8,0.2,10.8,0.2,18.8-1.3c16.1-3,28.7-10.7,36.6-22.2V276L282.7,291.1z"/>
       <path className="st0" d="M348.6,189.3v-7.2c-0.6,0-1.3-0.1-2-0.1h-42v6h-12v-6h-50v12h104c3.9,0,7,0.9,8.8,2.6c1.5,1.4,2.2,3.4,2.2,6 c0,16.7-20.7,27.3-35,27.3h-34.5l-12.8,12.8c-17.8,17.8-40.2,13.5-49,10.9l-3.5,11.5c4.4,1.3,11.6,3,20,3 c12.4,0,27.6-3.6,40.9-16.9l8.8-8.8V236h12v6h18c9.4,0,18.3-2.4,26-7v-12.4h12v2.3c5.7-6.8,9-14.8,9-22.3c0-5.9-2.1-11-6-14.8 c-0.8-0.8-1.8-1.6-3-2.3v3.7H348.6z"/>
       <rect className="st0" x="292.6" y="182" width="12" height="6"/>
       <path className="st0" d="M214.4,159.4c11.2-11.2,22.2-13.4,36.2-13.4h42v-12h-42c-14.4,0-29.8,2.1-44.7,17L126,230.9l8.5,8.5 L214.4,159.4z"/>
-      <rect className="st0" x="292.6" y="134" width="6" height="12"/>
-      <path className="st0" d="M348.6,182.1c5.4,0.3,9.2,1.8,12,3.5V122h-12V182.1z"/>
-      <rect className="st0" x="348.6" y="116" width="12" height="6"/>
-      <path className="st0" d="M348.6,189.3h12v-3.7c-2.8-1.7-6.6-3.2-12-3.5V189.3z"/>
-      <path className="st0" d="M356.7,229c-2.5,2.3-5.2,4.3-8.1,6v8.6h12v-18.8C359.4,226.3,358.1,227.7,356.7,229z"/>
-      <path className="st0" d="M304.6,364v-10h-6v-12h6V242h-11.5l-0.5,0.5V276l1-1.5l10,6.6l-11,16.8c0,0,0,0,0,0V364 c0,17.5,10.6,32.2,25,36.6v-12.9C310,383.6,304.6,374.5,304.6,364z"/>
-      <path className="st0" d="M303.6,281l-10-6.6l-1,1.5v21.9c0,0,0,0,0,0L303.6,281z"/>
-      <polygon className="st0" points="292.6,236 292.6,242.5 293.1,242 304.6,242 304.6,236 "/>
-      <path className="st0" d="M348.6,222.6V235c2.9-1.7,5.6-3.7,8.1-6c1.4-1.3,2.7-2.7,3.9-4.1v-2.3H348.6z"/>
+      <path className="st0" d="M304.6,364v-10h-6v-12h6V242h-11.5l-0.5,0.5V276l1-1.5l10,6.6l-11,16.8V364c0,17.5,10.6,32.2,25,36.6v-12.9 C310,383.6,304.6,374.5,304.6,364z"/>
       <path className="st1" d="M348.6,364c0,14.3-9.9,26-22,26v12c18.7,0,34-17,34-38V252.7h-12V364z"/>
-      <polygon className="st0" points="214.1,327.5 218.3,323.2 134.5,239.4 130.2,243.6 121.7,235.1 126,230.9 114.6,219.5 62.4,271.8 70.9,280.2 114.6,236.5 218.1,340 174.4,383.8 182.9,392.2 235.1,340 226.8,331.7 222.6,336 "/>
-      <rect className="st0" x="217.5" y="323.6" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -168.4919 252.4059)" width="6" height="12"/>
-      <rect className="st0" x="125.1" y="231.2" transform="matrix(0.707 -0.7072 0.7072 0.707 -130.2486 160.0984)" width="6" height="12"/>
-      <rect className="st0" x="108.6" y="272.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -167.2499 164.2231)" width="12" height="22.6"/>
-      <rect className="st0" x="304.6" y="342" width="26" height="12"/>
-      <rect className="st0" x="298.6" y="342" width="6" height="12"/>
     </svg>
   ),
   Biopsy: (p) => (
     <svg width="48" height="48" viewBox="0 0 432 432" {...p}>
-      <path className="st0" d="M395.3,404.6c-0.3-0.6-8.3-13.7-11.5-19.6c-12.2-22.7-8.7-34.2-5.5-44.3c0.8-2.6,1.6-5.1,2.1-7.8 c2.3-12.7,0.1-65.2-1.6-73.1c-1.4-6.5-9.9-9-14.9-9.9l-1.9-0.3l-1.3-1.3c-6.1-6.1-14.2-9.8-21.2-9.8h-2.7l-1.8-2 c-7.6-8.4-17.1-9.7-25.5-10.9l-3.9-0.5l-1.5-2.5c-0.1-0.2-9.6-16.3-15-26c-0.5-0.4-2.8-1.3-6.6-0.6c-4.1,0.7-9.1,3.1-11.9,7.7 c1,6.4,2.5,15.2,4.4,26.7l0.1,0.8l-0.1,0.8c-0.8,9.4-5.6,60.3-5.7,60.8l-11.9-1.1c0-0.5,4.6-48.9,5.6-60c-2.1-12.4-3.6-21.6-4.6-28 l-0.3-1.8l0.8-1.6c4.9-10.8,16.2-16,25.3-16.4c7.2-0.3,12.8,2.2,15.4,6.8c4.1,7.3,10.6,18.4,13.5,23.4c8.6,1.2,19.6,3.3,29,12.6 c8.9,0.7,18.3,5,25.7,11.9c12.6,2.7,20.6,9.3,22.6,18.8c2,9.4,4.4,63.2,1.7,77.8c-0.6,3.4-1.5,6.3-2.4,9.2c-2.8,9-5.2,16.8,4.6,35 c3.1,5.7,11.1,19,11.2,19.1L395.3,404.6z"/>
-      <path className="st0" d="M295.1,404.3l-8.4-15.7c-3.8-7.4-10-11-17.1-15.1c-7.1-4.1-15.1-8.7-21.7-17.8c-4.4-6.1-24.9-63-24.9-80.9h12 c0,14.4,19.1,68.5,22.7,73.9c5,6.9,11.3,10.6,18,14.4c8.1,4.7,16.4,9.5,21.8,20.1l8.3,15.6L295.1,404.3z"/>
       <path className="st0" d="M144.4,263.4c-65.1,0-118-52.9-118-118s52.9-118,118-118s118,52.9,118,118S209.5,263.4,144.4,263.4z M144.4,39.4c-58.4,0-106,47.6-106,106s47.6,106,106,106s106-47.6,106-106S202.9,39.4,144.4,39.4z"/>
-      <rect className="st0" x="250.3" y="185.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -65.2344 239.3277)" width="12" height="25"/>
-      <rect className="st0" x="236.3" y="219.1" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -106.718 244.9606)" width="12" height="64.5"/>
       <polygon className="st1" points="188.5,197.4 154.4,168.2 154.4,81.4 166.4,81.4 166.4,162.7 196.3,188.3 "/>
-      <rect className="st1" x="197" y="144.6" transform="matrix(0.6508 -0.7593 0.7593 0.6508 -49.457 209.4883)" width="12" height="27.8"/>
       <polygon className="st1" points="100.4,197.4 92.6,188.3 122.4,162.7 122.4,81.4 134.4,81.4 134.4,168.2 "/>
-      <rect className="st1" x="71.9" y="152.5" transform="matrix(0.7593 -0.6508 0.6508 0.7593 -82.4851 94.0361)" width="27.8" height="12"/>
     </svg>
   ),
   Check: (p) => (
@@ -101,66 +135,28 @@ const Icon = {
   ),
 };
 
-// ===== DATA =====
-const services = [
-  { icon: <Icon.Drop />, title: "Blood Draws", desc: "Stop in at our hospitals or clinics. Walk-in appointments are accepted; we welcome every patient — no appointment needed.", href: "Services.html#blood-draws" },
-  { icon: <Icon.Microscope />, title: "Laboratory Testing", desc: "We perform comprehensive testing on blood and other specimens to help detect, monitor, and prevent a wide range of conditions.", href: "Services.html#lab-testing" },
-  { icon: <Icon.Tube />, title: "Sample Collection", desc: "Urine, stool, and serum sample specimen drop-off options designed around your schedule.", href: "Services.html#sample-collection" },
-  { icon: <Icon.Biopsy />, title: "Tissue Biopsy Analysis", desc: "We perform comprehensive testing to detect and characterize benign and malignant tissue and preserve a wide range of conditions.", href: "Services.html#tissue-biopsy" },
-];
+// ===== DATA (loaded from content.json, falls back to hardcoded) =====
+const serviceIcons = [<Icon.Drop />, <Icon.Microscope />, <Icon.Tube />, <Icon.Biopsy />];
 
-const locations = [
-  {
-    id: "main",
-    name: "Main Lab",
-    address: "1311 1st Avenue SE",
-    city: "Cedar Rapids, IA 52402",
-    weekday: "Mon–Fri: 6am–6pm",
-    sat: "Sat: 8am–noon",
-    sun: "Sun: Closed",
-    phone1: "319.555.1411",
-    phone2: "1.800.728.7203",
-  },
-  {
-    id: "czech",
-    name: "Czech Square",
-    address: "84 16th Avenue SW",
-    city: "Cedar Rapids, IA 52404",
-    weekday: "Mon–Fri: 7am–5pm",
-    sat: "Sat: 8am–noon",
-    sun: "Sun: Closed",
-    phone1: "319.555.2102",
-    phone2: "1.800.728.7203",
-  },
-  {
-    id: "southwest",
-    name: "Southwest",
-    address: "2421 Edgewood Rd SW",
-    city: "Cedar Rapids, IA 52404",
-    weekday: "Mon–Fri: 6am–6pm",
-    sat: "Sat: 8am–noon",
-    sun: "Sun: Closed",
-    phone1: "319.555.3344",
-    phone2: "1.800.728.7203",
-  },
-  {
-    id: "marion",
-    name: "Marion",
-    address: "2300 Blairs Ferry Rd",
-    city: "Marion, IA 52302",
-    weekday: "Mon–Fri: 7am–5pm",
-    sat: "Sat: Closed",
-    sun: "Sun: Closed",
-    phone1: "319.555.7788",
-    phone2: "1.800.728.7203",
-  },
+const services = (_c('services.items', null) || [
+  { title: "Blood Draws",          desc: "Stop in at our hospitals or clinics. Walk-in appointments are accepted; we welcome every patient — no appointment needed.", href: "Services.html#blood-draws" },
+  { title: "Laboratory Testing",   desc: "We perform comprehensive testing on blood and other specimens to help detect, monitor, and prevent a wide range of conditions.", href: "Services.html#lab-testing" },
+  { title: "Sample Collection",    desc: "Urine, stool, and serum sample specimen drop-off options designed around your schedule.", href: "Services.html#sample-collection" },
+  { title: "Tissue Biopsy Analysis", desc: "We perform comprehensive testing to detect and characterize benign and malignant tissue and preserve a wide range of conditions.", href: "Services.html#tissue-biopsy" },
+]).map((s, i) => ({ ...s, icon: serviceIcons[i] || serviceIcons[0] }));
+
+const locations = _c('locations.items', null) || [
+  { id: "main",      name: "Main Lab",     address: "1311 1st Avenue SE",   city: "Cedar Rapids, IA 52402", weekday: "Mon–Fri: 6am–6pm", sat: "Sat: 8am–noon", sun: "Sun: Closed", phone1: "319.555.1411", phone2: "1.800.728.7203" },
+  { id: "czech",     name: "Czech Square", address: "84 16th Avenue SW",    city: "Cedar Rapids, IA 52404", weekday: "Mon–Fri: 7am–5pm", sat: "Sat: 8am–noon", sun: "Sun: Closed", phone1: "319.555.2102", phone2: "1.800.728.7203" },
+  { id: "southwest", name: "Southwest",    address: "2421 Edgewood Rd SW",  city: "Cedar Rapids, IA 52404", weekday: "Mon–Fri: 6am–6pm", sat: "Sat: 8am–noon", sun: "Sun: Closed", phone1: "319.555.3344", phone2: "1.800.728.7203" },
+  { id: "marion",    name: "Marion",       address: "2300 Blairs Ferry Rd", city: "Marion, IA 52302",       weekday: "Mon–Fri: 7am–5pm", sat: "Sat: Closed",   sun: "Sun: Closed", phone1: "319.555.7788", phone2: "1.800.728.7203" },
 ];
 
 const blogPosts = [
-  { tag: "preparation", cls: "blog-img-1", src: "assets/blog-1.jpg", title: "Fasting Before a Lab Test", desc: "Here's everything you need to know about fasting before bloodwork — what to eat, when to stop, and why your provider asks for it.", img: "clock + plate", href: "Blog - Fasting Before a Lab Test What You Actually Need to Know.html" },
-  { tag: "costs", cls: "blog-img-2", src: "assets/blog-2.jpg", title: "How Much Does Lab Work Cost Without Insurance?", desc: "Walking into a lab without insurance? Here's the real out-of-pocket cost breakdown for the most common panels.", img: "coins", href: "Blog - How Much Does Lab Work Cost Without Insurance.html" },
-  { tag: "hydration", cls: "blog-img-3", src: "assets/blog-3.jpg", title: "Can I Drink Water Before a Blood Test?", desc: "Hydration matters — but so do the rules of your specific test. Here's exactly what to drink (and what to avoid).", img: "water glass", href: "Blog - Can I Drink Water Before a Blood Test.html" },
-  { tag: "results", cls: "blog-img-4", src: "assets/blog-4.jpg", title: "How Long Do Lab Results Take (and Why)?", desc: "The timeline from sample to result depends on the test, the lab workflow, and your provider. Here's what to expect.", img: "test tubes", href: "Blog - How Long Do Lab Results Take and Why.html" },
+  { tag: "preparation", src: "assets/blog-1.jpg", title: "Fasting Before a Lab Test", desc: "Here's everything you need to know about fasting before bloodwork — what to eat, when to stop, and why your provider asks for it.", href: "Blog - Fasting Before a Lab Test What You Actually Need to Know.html" },
+  { tag: "costs",       src: "assets/blog-2.jpg", title: "How Much Does Lab Work Cost Without Insurance?", desc: "Walking into a lab without insurance? Here's the real out-of-pocket cost breakdown for the most common panels.", href: "Blog - How Much Does Lab Work Cost Without Insurance.html" },
+  { tag: "hydration",   src: "assets/blog-3.jpg", title: "Can I Drink Water Before a Blood Test?", desc: "Hydration matters — but so do the rules of your specific test. Here's exactly what to drink (and what to avoid).", href: "Blog - Can I Drink Water Before a Blood Test.html" },
+  { tag: "results",     src: "assets/blog-4.jpg", title: "How Long Do Lab Results Take (and Why)?", desc: "The timeline from sample to result depends on the test, the lab workflow, and your provider. Here's what to expect.", href: "Blog - How Long Do Lab Results Take and Why.html" },
 ];
 
 // ===== COMPONENTS =====
@@ -193,9 +189,7 @@ function Nav() {
   return (
     <header className="nav">
       <div className="nav-inner">
-        <a href="#" className="nav-logo" aria-label="Weland Labs home">
-          <Logo />
-        </a>
+        <a href="#" className="nav-logo" aria-label="Weland Labs home"><Logo /></a>
         <nav className={`nav-links${open ? " open" : ""}`}>
           <a href="Services.html">Services</a>
           <a href="Locations.html">Locations</a>
@@ -214,15 +208,15 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="hero" data-screen-label="01 Hero">
+    <section className="hero">
       <div className="hero-grid hero-grid--reverse">
         <div className="hero-text">
-          <p className="eyebrow">No appointment needed</p>
-          <h1>Precision Testing.<br/>Personal Care.</h1>
-          <p>For over 50 years, Weland Labs has delivered accurate, timely, and compassionate diagnostic testing to patients, physicians, and healthcare systems across Eastern Iowa. With advanced technology, experienced professionals, and a commitment to efficiency, we make lab testing simple, accessible, and reliable.</p>
+          <p className="eyebrow">{_c('hero.eyebrow', 'No appointment needed')}</p>
+          <h1>{_c('hero.heading1', 'Precision Testing.')}<br/>{_c('hero.heading2', 'Personal Care.')}</h1>
+          <p>{_c('hero.body', 'For over 50 years, Weland Labs has delivered accurate, timely, and compassionate diagnostic testing to patients, physicians, and healthcare systems across Eastern Iowa.')}</p>
           <div className="hero-actions">
-            <a href="Services.html" className="btn btn-primary">Services</a>
-            <a href="Locations.html" className="btn btn-ghost">Locations <Icon.Arrow /></a>
+            <a href={_c('hero.cta1Href','Services.html')} className="btn btn-primary">{_c('hero.cta1Text','Services')}</a>
+            <a href={_c('hero.cta2Href','Locations.html')} className="btn btn-ghost">{_c('hero.cta2Text','Locations')} <Icon.Arrow /></a>
           </div>
         </div>
         <div className="hero-image" aria-hidden="true"></div>
@@ -233,10 +227,10 @@ function Hero() {
 
 function Services() {
   return (
-    <section id="services" data-screen-label="02 Services">
+    <section id="services">
       <div className="container">
         <div className="section-head">
-          <h2>Comprehensive Lab Services</h2>
+          <h2>{_c('services.heading','Comprehensive Lab Services')}</h2>
           <a href="Services.html" className="view-all">View All <Icon.Arrow /></a>
         </div>
         <div className="services-grid">
@@ -256,25 +250,30 @@ function Services() {
 }
 
 function Testing() {
+  const bullets = _c('testing.bullets', [
+    "Fast turnaround times so you and your provider can act quickly",
+    "Convenient access with multiple locations and walk-in availability",
+    "Lower out-of-pocket costs compared to many hospital systems",
+    "Efficient visits — most patients are in and out in under 20 minutes",
+  ]);
   return (
-    <section className="testing" data-screen-label="03 Accurate testing">
+    <section className="testing">
       <div className="container">
         <div className="testing-grid">
           <div className="testing-image" aria-hidden="true">
             <div className="placeholder">[ provider with patient ]</div>
           </div>
           <div>
-            <h2>Accurate testing. Clear answers.</h2>
-            <p style={{color: "var(--muted)", fontSize: "15px", lineHeight: 1.7, margin: "0 0 8px"}}>
-              Weland Labs provides a full range of diagnostic services for patients referred by hospitals, clinics, and healthcare providers. From routine screenings to specialized analyses, our team delivers fast, reliable results to support confident clinical decisions.
+            <h2>{_c('testing.heading','Accurate testing. Clear answers.')}</h2>
+            <p style={{color:"var(--muted)",fontSize:"15px",lineHeight:1.7,margin:"0 0 8px"}}>
+              {_c('testing.body','Weland Labs provides a full range of diagnostic services for patients referred by hospitals, clinics, and healthcare providers.')}
             </p>
             <ul className="testing-bullets">
-              <li><span className="check"><Icon.Check /></span> Fast turnaround times so you and your provider can act quickly</li>
-              <li><span className="check"><Icon.Check /></span> Convenient access with multiple locations and walk-in availability</li>
-              <li><span className="check"><Icon.Check /></span> Lower out-of-pocket costs compared to many hospital systems</li>
-              <li><span className="check"><Icon.Check /></span> Efficient visits — most patients are in and out in under 20 minutes</li>
+              {bullets.map((b, i) => (
+                <li key={i}><span className="check"><Icon.Check /></span> {b}</li>
+              ))}
             </ul>
-            <a href="#" className="btn btn-outline">Read more <Icon.Arrow /></a>
+            <a href={_c('testing.ctaHref','#')} className="btn btn-outline">{_c('testing.ctaText','Read more')} <Icon.Arrow /></a>
           </div>
         </div>
       </div>
@@ -283,26 +282,20 @@ function Testing() {
 }
 
 function Locations() {
-  const [active, setActive] = useState("main");
-  const loc = locations.find(l => l.id === active);
+  const [active, setActive] = useState(locations[0]?.id || 'main');
+  const loc = locations.find(l => l.id === active) || locations[0];
   return (
-    <section id="locations" className="locations" data-screen-label="04 Locations">
+    <section id="locations" className="locations">
       <div className="container">
         <div className="section-head">
-          <h2>Four Convenient Locations</h2>
+          <h2>{_c('locations.heading','Four Convenient Locations')}</h2>
         </div>
         <div className="locations-card">
           <div className="location-tabs" role="tablist">
             {locations.map(l => (
-              <button
-                key={l.id}
-                role="tab"
-                aria-selected={active === l.id}
-                className={`location-tab${active === l.id ? " active" : ""}`}
-                onClick={() => setActive(l.id)}
-              >
-                {l.name}
-              </button>
+              <button key={l.id} role="tab" aria-selected={active===l.id}
+                className={`location-tab${active===l.id?" active":""}`}
+                onClick={() => setActive(l.id)}>{l.name}</button>
             ))}
           </div>
           <div className="location-content">
@@ -310,16 +303,12 @@ function Locations() {
               <div className="placeholder">[ {loc.name} exterior photo ]</div>
             </div>
             <div className="location-info">
-              <div>
-                <h4>{loc.name.toUpperCase()}</h4>
-              </div>
+              <div><h4>{loc.name.toUpperCase()}</h4></div>
               <div className="location-info-row">
                 <div>
                   <p className="addr">{loc.address}<br/>{loc.city}</p>
                   <div className="location-hours">
-                    <strong>{loc.weekday}</strong><br/>
-                    {loc.sat}<br/>
-                    {loc.sun}
+                    <strong>{loc.weekday}</strong><br/>{loc.sat}<br/>{loc.sun}
                   </div>
                 </div>
                 <div className="location-meta">
@@ -338,7 +327,7 @@ function Locations() {
 
 function Blog() {
   return (
-    <section id="blog" className="blog" data-screen-label="05 Blog">
+    <section id="blog" className="blog">
       <div className="container">
         <div className="section-head">
           <h2>Blog</h2>
@@ -348,9 +337,7 @@ function Blog() {
           {blogPosts.map((p, i) => (
             <a key={i} href={p.href} className="blog-card-link">
               <article className="blog-card">
-                <div className="blog-image">
-                  <img src={p.src} alt={p.img} />
-                </div>
+                <div className="blog-image"><img src={p.src} alt={p.tag} /></div>
                 <h3>{p.title}</h3>
                 <p>{p.desc}</p>
               </article>
@@ -368,20 +355,18 @@ function Footer() {
       <section className="cta-band">
         <div className="container">
           <div>
-            <h2>Need a test today?</h2>
-            <p>Walk in to any of our four locations during open hours, or call ahead if you'd like us to confirm prep instructions for your specific test.</p>
+            <h2>{_c('ctaBand.heading','Need a test today?')}</h2>
+            <p>{_c('ctaBand.body','Walk in to any of our four locations during open hours, or call ahead if you\'d like us to confirm prep instructions for your specific test.')}</p>
           </div>
-          <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
-            <a href="Locations.html" className="btn btn-primary">Find a location <Icon.Arrow /></a>
-            <a href="Contact.html" className="btn btn-ghost">Contact us <Icon.Arrow /></a>
+          <div style={{display:"flex",gap:14,flexWrap:"wrap"}}>
+            <a href={_c('ctaBand.cta1Href','Locations.html')} className="btn btn-primary">{_c('ctaBand.cta1Text','Find a location')} <Icon.Arrow /></a>
+            <a href={_c('ctaBand.cta2Href','Contact.html')} className="btn btn-ghost">{_c('ctaBand.cta2Text','Contact us')} <Icon.Arrow /></a>
           </div>
         </div>
       </section>
       <footer className="footer" id="contact">
         <div className="container footer-inner">
-          <div className="footer-logo">
-            <Logo height={40} variant="footer" />
-          </div>
+          <div className="footer-logo"><Logo height={40} variant="footer" /></div>
           <div className="footer-social">
             <a href="#" className="social-icon" aria-label="Facebook"><Icon.Facebook /></a>
             <a href="#" className="social-icon" aria-label="LinkedIn"><Icon.LinkedIn /></a>
@@ -394,13 +379,9 @@ function Footer() {
 
 function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-
-  // Apply text scale to a CSS custom property on the root
   useEffect(() => {
     document.documentElement.style.setProperty('--text-scale', t.textScale);
   }, [t.textScale]);
-
-  // simple intersection observer for fade-up
   useEffect(() => {
     const els = document.querySelectorAll(".fade-up");
     const io = new IntersectionObserver((entries) => {
@@ -409,7 +390,6 @@ function App() {
     els.forEach(el => io.observe(el));
     return () => io.disconnect();
   }, []);
-
   return (
     <>
       <Nav />
@@ -430,8 +410,5 @@ function App() {
   );
 }
 
-const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "textScale": 1
-}/*EDITMODE-END*/;
-
+const TWEAK_DEFAULTS = { "textScale": 1 };
 ReactDOM.createRoot(document.getElementById("app")).render(<App />);
