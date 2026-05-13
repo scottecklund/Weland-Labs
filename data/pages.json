@@ -28,10 +28,30 @@
           "viewAllHref": "Services.html",
           "columns": 4,
           "cards": [
-            { "icon": "drop", "title": "Blood Draws", "desc": "Stop in at our hospitals or clinics. Walk-in appointments are accepted; we welcome every patient — no appointment needed.", "href": "Services.html#blood-draws" },
-            { "icon": "microscope", "title": "Laboratory Testing", "desc": "We perform comprehensive testing on blood and other specimens to help detect, monitor, and prevent a wide range of conditions.", "href": "Services.html#lab-testing" },
-            { "icon": "tube", "title": "Sample Collection", "desc": "Urine, stool, and serum sample specimen drop-off options designed around your schedule.", "href": "Services.html#sample-collection" },
-            { "icon": "biopsy", "title": "Tissue Biopsy Analysis", "desc": "We perform comprehensive testing to detect and characterize benign and malignant tissue and preserve a wide range of conditions.", "href": "Services.html#tissue-biopsy" }
+            {
+              "icon": "drop",
+              "title": "Blood Draws",
+              "desc": "Stop in at our hospitals or clinics. Walk-in appointments are accepted; we welcome every patient — no appointment needed.",
+              "href": "Services.html#blood-draws"
+            },
+            {
+              "icon": "microscope",
+              "title": "Laboratory Testing",
+              "desc": "We perform comprehensive testing on blood and other specimens to help detect, monitor, and prevent a wide range of conditions.",
+              "href": "Services.html#lab-testing"
+            },
+            {
+              "icon": "tube",
+              "title": "Sample Collection",
+              "desc": "Urine, stool, and serum sample specimen drop-off options designed around your schedule.",
+              "href": "Services.html#sample-collection"
+            },
+            {
+              "icon": "biopsy",
+              "title": "Tissue Biopsy Analysis",
+              "desc": "We perform comprehensive testing to detect and characterize benign and malignant tissue and preserve a wide range of conditions.",
+              "href": "Services.html#tissue-biopsy"
+            }
           ]
         }
       },
@@ -60,10 +80,50 @@
         "data": {
           "heading": "Four Convenient Locations",
           "items": [
-            { "id": "main",      "name": "Main Lab",     "address": "1311 1st Avenue SE",   "city": "Cedar Rapids, IA 52402", "weekday": "Mon–Fri: 6am–6pm", "sat": "Sat: 8am–noon", "sun": "Sun: Closed", "phone1": "319.555.1411", "phone2": "1.800.728.7203" },
-            { "id": "czech",     "name": "Czech Square", "address": "84 16th Avenue SW",    "city": "Cedar Rapids, IA 52404", "weekday": "Mon–Fri: 7am–5pm", "sat": "Sat: 8am–noon", "sun": "Sun: Closed", "phone1": "319.555.2102", "phone2": "1.800.728.7203" },
-            { "id": "southwest", "name": "Southwest",    "address": "2421 Edgewood Rd SW",  "city": "Cedar Rapids, IA 52404", "weekday": "Mon–Fri: 6am–6pm", "sat": "Sat: 8am–noon", "sun": "Sun: Closed", "phone1": "319.555.3344", "phone2": "1.800.728.7203" },
-            { "id": "marion",    "name": "Marion",       "address": "2300 Blairs Ferry Rd", "city": "Marion, IA 52302",       "weekday": "Mon–Fri: 7am–5pm", "sat": "Sat: Closed",   "sun": "Sun: Closed", "phone1": "319.555.7788", "phone2": "1.800.728.7203" }
+            {
+              "id": "main",
+              "name": "Main Lab",
+              "address": "1311 1st Avenue SE",
+              "city": "Cedar Rapids, IA 52402",
+              "weekday": "Mon–Fri: 6am–6pm",
+              "sat": "Sat: 8am–noon",
+              "sun": "Sun: Closed",
+              "phone1": "319.555.1411",
+              "phone2": "1.800.728.7203"
+            },
+            {
+              "id": "czech",
+              "name": "Czech Square",
+              "address": "84 16th Avenue SW",
+              "city": "Cedar Rapids, IA 52404",
+              "weekday": "Mon–Fri: 7am–5pm",
+              "sat": "Sat: 8am–noon",
+              "sun": "Sun: Closed",
+              "phone1": "319.555.2102",
+              "phone2": "1.800.728.7203"
+            },
+            {
+              "id": "southwest",
+              "name": "Southwest",
+              "address": "2421 Edgewood Rd SW",
+              "city": "Cedar Rapids, IA 52404",
+              "weekday": "Mon–Fri: 6am–6pm",
+              "sat": "Sat: 8am–noon",
+              "sun": "Sun: Closed",
+              "phone1": "319.555.3344",
+              "phone2": "1.800.728.7203"
+            },
+            {
+              "id": "marion",
+              "name": "Marion",
+              "address": "2300 Blairs Ferry Rd",
+              "city": "Marion, IA 52302",
+              "weekday": "Mon–Fri: 7am–5pm",
+              "sat": "Sat: Closed",
+              "sun": "Sun: Closed",
+              "phone1": "319.555.7788",
+              "phone2": "1.800.728.7203"
+            }
           ]
         }
       },
@@ -124,10 +184,26 @@
         "type": "stats-row",
         "data": {
           "items": [
-            { "value": "50+", "label": "Years in Operation", "sub": "Founded 1974" },
-            { "value": "4",   "label": "Lab Locations",      "sub": "Across Eastern Iowa" },
-            { "value": "20",  "label": "Minute Visits",      "sub": "Average patient time" },
-            { "value": "99%", "label": "Accuracy Rate",      "sub": "Across all panels" }
+            {
+              "value": "150+",
+              "label": "Years in Operation",
+              "sub": "Founded 1974"
+            },
+            {
+              "value": "4",
+              "label": "Lab Locations",
+              "sub": "Across Eastern Iowa"
+            },
+            {
+              "value": "20",
+              "label": "Minute Visits",
+              "sub": "Average patient time"
+            },
+            {
+              "value": "99%",
+              "label": "Accuracy Rate",
+              "sub": "Across all panels"
+            }
           ]
         }
       },
@@ -144,7 +220,8 @@
           "cta2Href": "Services.html"
         }
       }
-    ]
+    ],
+    "css": ""
   },
   "services": {
     "title": "Services",
@@ -168,7 +245,11 @@
           "image": "assets/blood-draw.jpg",
           "imageAlt": "Blood draw procedure",
           "imagePosition": "right",
-          "bullets": ["No appointment needed", "Walk-in welcome", "Under 20 minutes"],
+          "bullets": [
+            "No appointment needed",
+            "Walk-in welcome",
+            "Under 20 minutes"
+          ],
           "ctaText": "Find a location",
           "ctaHref": "Locations.html"
         }
@@ -182,7 +263,11 @@
           "image": "assets/lab-testing.jpg",
           "imageAlt": "Laboratory testing",
           "imagePosition": "left",
-          "bullets": ["Same-day results for routine panels", "Secure delivery to your provider", "Full range of diagnostic tests"],
+          "bullets": [
+            "Same-day results for routine panels",
+            "Secure delivery to your provider",
+            "Full range of diagnostic tests"
+          ],
           "ctaText": "",
           "ctaHref": ""
         }
@@ -249,10 +334,50 @@
         "data": {
           "heading": "",
           "items": [
-            { "id": "main",      "name": "Main Lab",     "address": "1311 1st Avenue SE",   "city": "Cedar Rapids, IA 52402", "weekday": "Mon–Fri: 6am–6pm", "sat": "Sat: 8am–noon", "sun": "Sun: Closed", "phone1": "319.555.1411", "phone2": "1.800.728.7203" },
-            { "id": "czech",     "name": "Czech Square", "address": "84 16th Avenue SW",    "city": "Cedar Rapids, IA 52404", "weekday": "Mon–Fri: 7am–5pm", "sat": "Sat: 8am–noon", "sun": "Sun: Closed", "phone1": "319.555.2102", "phone2": "1.800.728.7203" },
-            { "id": "southwest", "name": "Southwest",    "address": "2421 Edgewood Rd SW",  "city": "Cedar Rapids, IA 52404", "weekday": "Mon–Fri: 6am–6pm", "sat": "Sat: 8am–noon", "sun": "Sun: Closed", "phone1": "319.555.3344", "phone2": "1.800.728.7203" },
-            { "id": "marion",    "name": "Marion",       "address": "2300 Blairs Ferry Rd", "city": "Marion, IA 52302",       "weekday": "Mon–Fri: 7am–5pm", "sat": "Sat: Closed",   "sun": "Sun: Closed", "phone1": "319.555.7788", "phone2": "1.800.728.7203" }
+            {
+              "id": "main",
+              "name": "Main Lab",
+              "address": "1311 1st Avenue SE",
+              "city": "Cedar Rapids, IA 52402",
+              "weekday": "Mon–Fri: 6am–6pm",
+              "sat": "Sat: 8am–noon",
+              "sun": "Sun: Closed",
+              "phone1": "319.555.1411",
+              "phone2": "1.800.728.7203"
+            },
+            {
+              "id": "czech",
+              "name": "Czech Square",
+              "address": "84 16th Avenue SW",
+              "city": "Cedar Rapids, IA 52404",
+              "weekday": "Mon–Fri: 7am–5pm",
+              "sat": "Sat: 8am–noon",
+              "sun": "Sun: Closed",
+              "phone1": "319.555.2102",
+              "phone2": "1.800.728.7203"
+            },
+            {
+              "id": "southwest",
+              "name": "Southwest",
+              "address": "2421 Edgewood Rd SW",
+              "city": "Cedar Rapids, IA 52404",
+              "weekday": "Mon–Fri: 6am–6pm",
+              "sat": "Sat: 8am–noon",
+              "sun": "Sun: Closed",
+              "phone1": "319.555.3344",
+              "phone2": "1.800.728.7203"
+            },
+            {
+              "id": "marion",
+              "name": "Marion",
+              "address": "2300 Blairs Ferry Rd",
+              "city": "Marion, IA 52302",
+              "weekday": "Mon–Fri: 7am–5pm",
+              "sat": "Sat: Closed",
+              "sun": "Sun: Closed",
+              "phone1": "319.555.7788",
+              "phone2": "1.800.728.7203"
+            }
           ]
         }
       }
@@ -276,13 +401,34 @@
         "type": "faq-accordion",
         "data": {
           "items": [
-            { "question": "Do I need an appointment?", "answer": "No appointment is needed for blood draws at any of our four locations. Simply walk in during open hours and our team will take care of you." },
-            { "question": "Do I need to fast before my blood draw?", "answer": "It depends on the test. Common panels like lipids and glucose require 8–12 hours of fasting. Your provider's order will specify if fasting is required. When in doubt, call ahead and we'll check for you." },
-            { "question": "Can I drink water before my test?", "answer": "Yes — plain water is always allowed and actually encouraged. Staying hydrated makes veins easier to access and your draw more comfortable." },
-            { "question": "How long does it take?", "answer": "Most patients are in and out in under 20 minutes. The draw itself typically takes 5 minutes or less." },
-            { "question": "How much does it cost without insurance?", "answer": "We publish flat self-pay rates for the most common panels. A basic metabolic panel is $32, a lipid panel is $36, and a CBC is $24. Ask the front desk for a full price list." },
-            { "question": "How long do results take?", "answer": "Routine panels are typically available same day or within 24 hours. Specialty tests and cultures may take 2–7 days depending on the test." },
-            { "question": "Do you accept HSA and FSA cards?", "answer": "Yes, we accept HSA and FSA cards at all locations." }
+            {
+              "question": "Do I need an appointment?",
+              "answer": "No appointment is needed for blood draws at any of our four locations. Simply walk in during open hours and our team will take care of you."
+            },
+            {
+              "question": "Do I need to fast before my blood draw?",
+              "answer": "It depends on the test. Common panels like lipids and glucose require 8–12 hours of fasting. Your provider's order will specify if fasting is required. When in doubt, call ahead and we'll check for you."
+            },
+            {
+              "question": "Can I drink water before my test?",
+              "answer": "Yes — plain water is always allowed and actually encouraged. Staying hydrated makes veins easier to access and your draw more comfortable."
+            },
+            {
+              "question": "How long does it take?",
+              "answer": "Most patients are in and out in under 20 minutes. The draw itself typically takes 5 minutes or less."
+            },
+            {
+              "question": "How much does it cost without insurance?",
+              "answer": "We publish flat self-pay rates for the most common panels. A basic metabolic panel is $32, a lipid panel is $36, and a CBC is $24. Ask the front desk for a full price list."
+            },
+            {
+              "question": "How long do results take?",
+              "answer": "Routine panels are typically available same day or within 24 hours. Specialty tests and cultures may take 2–7 days depending on the test."
+            },
+            {
+              "question": "Do you accept HSA and FSA cards?",
+              "answer": "Yes, we accept HSA and FSA cards at all locations."
+            }
           ]
         }
       },
@@ -322,11 +468,47 @@
           "submitText": "Send Message",
           "successMessage": "Thank you — we'll be in touch shortly.",
           "fields": [
-            { "id": "f1", "type": "text",     "label": "Full Name",     "placeholder": "Jane Smith",              "required": true },
-            { "id": "f2", "type": "email",    "label": "Email Address", "placeholder": "jane@example.com",        "required": true },
-            { "id": "f3", "type": "phone",    "label": "Phone Number",  "placeholder": "319.555.0000",            "required": false },
-            { "id": "f4", "type": "select",   "label": "Location",      "options": ["Main Lab","Czech Square","Southwest","Marion","General Inquiry"], "required": false },
-            { "id": "f5", "type": "textarea", "label": "Message",       "placeholder": "How can we help you?",    "required": true }
+            {
+              "id": "f1",
+              "type": "text",
+              "label": "Full Name",
+              "placeholder": "Jane Smith",
+              "required": true
+            },
+            {
+              "id": "f2",
+              "type": "email",
+              "label": "Email Address",
+              "placeholder": "jane@example.com",
+              "required": true
+            },
+            {
+              "id": "f3",
+              "type": "phone",
+              "label": "Phone Number",
+              "placeholder": "319.555.0000",
+              "required": false
+            },
+            {
+              "id": "f4",
+              "type": "select",
+              "label": "Location",
+              "options": [
+                "Main Lab",
+                "Czech Square",
+                "Southwest",
+                "Marion",
+                "General Inquiry"
+              ],
+              "required": false
+            },
+            {
+              "id": "f5",
+              "type": "textarea",
+              "label": "Message",
+              "placeholder": "How can we help you?",
+              "required": true
+            }
           ]
         }
       }
