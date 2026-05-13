@@ -60,13 +60,36 @@
     "schema": "ContactPage"
   },
   "blog": {
-    "titleTag": "Blog — Weland Labs",
-    "metaDescription": "Lab tips, health insights, and patient guides from the Weland Labs clinical team.",
-    "focusKeyword": "lab test tips health blog Iowa",
-    "ogTitle": "Blog — Weland Labs",
-    "ogDescription": "Lab tips and patient guides from our clinical team.",
+    "titleTag": "Blog - Weland Labs | Cedar Rapids Business Insights",
+    "metaDescription": "Read the latest insights from Weland Labs in Cedar Rapids, IA. Discover business trends, technology updates, and industry expertise from our team.",
+    "focusKeyword": "Weland Labs blog",
+    "ogTitle": "Business Blog - Weland Labs Cedar Rapids",
+    "ogDescription": "Stay updated with the latest insights and expertise from Weland Labs. Read our blog for business trends and technology updates in Cedar Rapids, Iowa.",
     "ogImage": "assets/og-blog.jpg",
     "canonical": "https://weland.devlink.info/Blog.html",
-    "schema": "Blog"
+    "schema": "Blog",
+    "aeoAnswer": "Weland Labs blog features the latest business insights, technology updates, and industry expertise from our Cedar Rapids team, helping clients stay informed about current trends and innovations.",
+    "aeoTopics": [
+      "Weland Labs blog posts",
+      "Cedar Rapids business insights",
+      "technology updates Iowa",
+      "business consulting articles",
+      "industry expertise blog",
+      "Iowa business trends"
+    ],
+    "aeoFAQs": [
+      {
+        "q": "What topics does Weland Labs blog cover?",
+        "a": "Weland Labs blog covers business insights, technology updates, industry trends, and expert analysis relevant to Cedar Rapids and Iowa businesses."
+      },
+      {
+        "q": "How often does Weland Labs publish new blog content?",
+        "a": "Weland Labs regularly publishes fresh content featuring the latest insights and expertise from our Cedar Rapids team to keep clients informed."
+      },
+      {
+        "q": "Where is Weland Labs located?",
+        "a": "Weland Labs is located in Cedar Rapids, Iowa, serving local and regional businesses with expert insights and consulting services."
+      }
+    ]
   }
 }
