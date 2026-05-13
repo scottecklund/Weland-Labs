@@ -1,0 +1,72 @@
+{
+  "home": {
+    "titleTag": "Weland Labs — Precision Testing. Personal Care.",
+    "metaDescription": "Weland Labs offers walk-in blood draws, comprehensive laboratory testing, and courier specimen collection across Eastern Iowa. No appointment needed.",
+    "focusKeyword": "lab testing Cedar Rapids",
+    "ogTitle": "Weland Labs — Precision Testing. Personal Care.",
+    "ogDescription": "Walk-in blood draws and comprehensive diagnostic testing across Eastern Iowa. Four convenient locations, no appointment needed.",
+    "ogImage": "assets/og-home.jpg",
+    "canonical": "https://weland.devlink.info/",
+    "schema": "LocalBusiness"
+  },
+  "about": {
+    "titleTag": "About Us — Weland Labs",
+    "metaDescription": "Learn about Weland Labs — over 50 years of accurate, timely, and compassionate diagnostic testing for patients and providers across Eastern Iowa.",
+    "focusKeyword": "Weland Labs Cedar Rapids",
+    "ogTitle": "About Weland Labs",
+    "ogDescription": "Over 50 years serving Eastern Iowa with precision diagnostic testing.",
+    "ogImage": "assets/og-about.jpg",
+    "canonical": "https://weland.devlink.info/About.html",
+    "schema": "AboutPage"
+  },
+  "services": {
+    "titleTag": "Lab Services — Weland Labs",
+    "metaDescription": "Blood draws, laboratory testing, sample collection, and tissue biopsy analysis. Walk-in welcome at all four Weland Labs locations in Eastern Iowa.",
+    "focusKeyword": "blood draw lab testing Iowa",
+    "ogTitle": "Lab Services — Weland Labs",
+    "ogDescription": "Comprehensive diagnostic lab services across Eastern Iowa. Walk-in welcome.",
+    "ogImage": "assets/og-services.jpg",
+    "canonical": "https://weland.devlink.info/Services.html",
+    "schema": "MedicalBusiness"
+  },
+  "locations": {
+    "titleTag": "Locations — Weland Labs",
+    "metaDescription": "Four Weland Labs locations in Cedar Rapids and Marion, Iowa. Walk-in blood draws, no appointment needed. Find your nearest lab.",
+    "focusKeyword": "lab near me Cedar Rapids Iowa",
+    "ogTitle": "Weland Labs Locations",
+    "ogDescription": "Four convenient locations in Cedar Rapids and Marion, Iowa.",
+    "ogImage": "assets/og-locations.jpg",
+    "canonical": "https://weland.devlink.info/Locations.html",
+    "schema": "LocalBusiness"
+  },
+  "faq": {
+    "titleTag": "FAQ — Weland Labs",
+    "metaDescription": "Answers to common questions about lab visits at Weland Labs — fasting, costs, results, appointments, and more.",
+    "focusKeyword": "lab test FAQ do I need to fast",
+    "ogTitle": "Frequently Asked Questions — Weland Labs",
+    "ogDescription": "Everything you need to know before your lab visit.",
+    "ogImage": "assets/og-faq.jpg",
+    "canonical": "https://weland.devlink.info/FAQ.html",
+    "schema": "FAQPage"
+  },
+  "contact": {
+    "titleTag": "Contact — Weland Labs",
+    "metaDescription": "Contact Weland Labs by phone, email, or the online form. Four locations in Cedar Rapids and Marion, Iowa.",
+    "focusKeyword": "contact Weland Labs",
+    "ogTitle": "Contact Weland Labs",
+    "ogDescription": "Reach our team by phone, email, or online form.",
+    "ogImage": "assets/og-contact.jpg",
+    "canonical": "https://weland.devlink.info/Contact.html",
+    "schema": "ContactPage"
+  },
+  "blog": {
+    "titleTag": "Blog — Weland Labs",
+    "metaDescription": "Lab tips, health insights, and patient guides from the Weland Labs clinical team.",
+    "focusKeyword": "lab test tips health blog Iowa",
+    "ogTitle": "Blog — Weland Labs",
+    "ogDescription": "Lab tips and patient guides from our clinical team.",
+    "ogImage": "assets/og-blog.jpg",
+    "canonical": "https://weland.devlink.info/Blog.html",
+    "schema": "Blog"
+  }
+}

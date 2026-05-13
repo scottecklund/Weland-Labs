@@ -1,0 +1,360 @@
+{
+  "home": {
+    "title": "Home",
+    "blocks": [
+      {
+        "id": "home_001",
+        "type": "hero",
+        "data": {
+          "eyebrow": "No appointment needed",
+          "heading1": "Precision Testing.",
+          "heading2": "Personal Care.",
+          "body": "For over 50 years, Weland Labs has delivered accurate, timely, and compassionate diagnostic testing to patients, physicians, and healthcare systems across Eastern Iowa. With advanced technology, experienced professionals, and a commitment to efficiency, we make lab testing simple, accessible, and reliable.",
+          "image": "assets/hero.jpg",
+          "imageAlt": "Weland Labs hero image",
+          "imagePosition": "right",
+          "cta1Text": "Services",
+          "cta1Href": "Services.html",
+          "cta2Text": "Locations",
+          "cta2Href": "Locations.html"
+        }
+      },
+      {
+        "id": "home_002",
+        "type": "cards-grid",
+        "data": {
+          "heading": "Comprehensive Lab Services",
+          "viewAllText": "View All",
+          "viewAllHref": "Services.html",
+          "columns": 4,
+          "cards": [
+            { "icon": "drop", "title": "Blood Draws", "desc": "Stop in at our hospitals or clinics. Walk-in appointments are accepted; we welcome every patient — no appointment needed.", "href": "Services.html#blood-draws" },
+            { "icon": "microscope", "title": "Laboratory Testing", "desc": "We perform comprehensive testing on blood and other specimens to help detect, monitor, and prevent a wide range of conditions.", "href": "Services.html#lab-testing" },
+            { "icon": "tube", "title": "Sample Collection", "desc": "Urine, stool, and serum sample specimen drop-off options designed around your schedule.", "href": "Services.html#sample-collection" },
+            { "icon": "biopsy", "title": "Tissue Biopsy Analysis", "desc": "We perform comprehensive testing to detect and characterize benign and malignant tissue and preserve a wide range of conditions.", "href": "Services.html#tissue-biopsy" }
+          ]
+        }
+      },
+      {
+        "id": "home_003",
+        "type": "text-image",
+        "data": {
+          "heading": "Accurate testing. Clear answers.",
+          "body": "Weland Labs provides a full range of diagnostic services for patients referred by hospitals, clinics, and healthcare providers. From routine screenings to specialized analyses, our team delivers fast, reliable results to support confident clinical decisions.",
+          "image": "assets/about.jpg",
+          "imageAlt": "Provider with patient",
+          "imagePosition": "left",
+          "bullets": [
+            "Fast turnaround times so you and your provider can act quickly",
+            "Convenient access with multiple locations and walk-in availability",
+            "Lower out-of-pocket costs compared to many hospital systems",
+            "Efficient visits — most patients are in and out in under 20 minutes"
+          ],
+          "ctaText": "Read more",
+          "ctaHref": "About.html"
+        }
+      },
+      {
+        "id": "home_004",
+        "type": "locations",
+        "data": {
+          "heading": "Four Convenient Locations",
+          "items": [
+            { "id": "main",      "name": "Main Lab",     "address": "1311 1st Avenue SE",   "city": "Cedar Rapids, IA 52402", "weekday": "Mon–Fri: 6am–6pm", "sat": "Sat: 8am–noon", "sun": "Sun: Closed", "phone1": "319.555.1411", "phone2": "1.800.728.7203" },
+            { "id": "czech",     "name": "Czech Square", "address": "84 16th Avenue SW",    "city": "Cedar Rapids, IA 52404", "weekday": "Mon–Fri: 7am–5pm", "sat": "Sat: 8am–noon", "sun": "Sun: Closed", "phone1": "319.555.2102", "phone2": "1.800.728.7203" },
+            { "id": "southwest", "name": "Southwest",    "address": "2421 Edgewood Rd SW",  "city": "Cedar Rapids, IA 52404", "weekday": "Mon–Fri: 6am–6pm", "sat": "Sat: 8am–noon", "sun": "Sun: Closed", "phone1": "319.555.3344", "phone2": "1.800.728.7203" },
+            { "id": "marion",    "name": "Marion",       "address": "2300 Blairs Ferry Rd", "city": "Marion, IA 52302",       "weekday": "Mon–Fri: 7am–5pm", "sat": "Sat: Closed",   "sun": "Sun: Closed", "phone1": "319.555.7788", "phone2": "1.800.728.7203" }
+          ]
+        }
+      },
+      {
+        "id": "home_005",
+        "type": "blog-grid",
+        "data": {
+          "heading": "Blog",
+          "viewAllText": "View All",
+          "viewAllHref": "Blog.html",
+          "postCount": 4
+        }
+      },
+      {
+        "id": "home_006",
+        "type": "cta-band",
+        "data": {
+          "heading": "Need a test today?",
+          "body": "Walk in to any of our four locations during open hours, or call ahead if you'd like us to confirm prep instructions for your specific test.",
+          "background": "navy",
+          "cta1Text": "Find a location",
+          "cta1Href": "Locations.html",
+          "cta2Text": "Contact us",
+          "cta2Href": "Contact.html"
+        }
+      }
+    ]
+  },
+  "about": {
+    "title": "About Us",
+    "blocks": [
+      {
+        "id": "about_001",
+        "type": "section-header",
+        "data": {
+          "eyebrow": "Who we are",
+          "heading": "About Weland Labs",
+          "subheading": "Serving Eastern Iowa for over 50 years with precision diagnostic testing.",
+          "alignment": "center"
+        }
+      },
+      {
+        "id": "about_002",
+        "type": "text-image",
+        "data": {
+          "heading": "Our Mission",
+          "body": "Weland Labs was founded on a simple belief: every patient deserves accurate, timely, and compassionate diagnostic testing. For over five decades we have served patients, physicians, and healthcare systems across Eastern Iowa with that belief at the center of everything we do.",
+          "image": "assets/about.jpg",
+          "imageAlt": "Weland Labs team",
+          "imagePosition": "right",
+          "bullets": [],
+          "ctaText": "",
+          "ctaHref": ""
+        }
+      },
+      {
+        "id": "about_003",
+        "type": "stats-row",
+        "data": {
+          "items": [
+            { "value": "50+", "label": "Years in Operation", "sub": "Founded 1974" },
+            { "value": "4",   "label": "Lab Locations",      "sub": "Across Eastern Iowa" },
+            { "value": "20",  "label": "Minute Visits",      "sub": "Average patient time" },
+            { "value": "99%", "label": "Accuracy Rate",      "sub": "Across all panels" }
+          ]
+        }
+      },
+      {
+        "id": "about_004",
+        "type": "cta-band",
+        "data": {
+          "heading": "Ready to visit?",
+          "body": "Find a location near you and walk in — no appointment needed.",
+          "background": "navy",
+          "cta1Text": "Find a location",
+          "cta1Href": "Locations.html",
+          "cta2Text": "View services",
+          "cta2Href": "Services.html"
+        }
+      }
+    ]
+  },
+  "services": {
+    "title": "Services",
+    "blocks": [
+      {
+        "id": "svc_001",
+        "type": "section-header",
+        "data": {
+          "eyebrow": "What we offer",
+          "heading": "Comprehensive Lab Services",
+          "subheading": "From routine blood draws to complex tissue analysis — all under one roof.",
+          "alignment": "center"
+        }
+      },
+      {
+        "id": "svc_002",
+        "type": "text-image",
+        "data": {
+          "heading": "Blood Draws",
+          "body": "Stop in at any of our locations. Walk-in appointments are accepted; we welcome every patient — no appointment needed. Most patients are in and out in under 20 minutes.",
+          "image": "assets/blood-draw.jpg",
+          "imageAlt": "Blood draw procedure",
+          "imagePosition": "right",
+          "bullets": ["No appointment needed", "Walk-in welcome", "Under 20 minutes"],
+          "ctaText": "Find a location",
+          "ctaHref": "Locations.html"
+        }
+      },
+      {
+        "id": "svc_003",
+        "type": "text-image",
+        "data": {
+          "heading": "Laboratory Testing",
+          "body": "We perform comprehensive testing on blood and other specimens to help detect, monitor, and prevent a wide range of conditions. Results are delivered quickly and securely to your provider.",
+          "image": "assets/lab-testing.jpg",
+          "imageAlt": "Laboratory testing",
+          "imagePosition": "left",
+          "bullets": ["Same-day results for routine panels", "Secure delivery to your provider", "Full range of diagnostic tests"],
+          "ctaText": "",
+          "ctaHref": ""
+        }
+      },
+      {
+        "id": "svc_004",
+        "type": "text-image",
+        "data": {
+          "heading": "Sample Collection",
+          "body": "Urine, stool, and serum sample specimen drop-off options designed around your schedule. Drop off at any location during open hours.",
+          "image": "assets/sample.jpg",
+          "imageAlt": "Sample collection",
+          "imagePosition": "right",
+          "bullets": [],
+          "ctaText": "",
+          "ctaHref": ""
+        }
+      },
+      {
+        "id": "svc_005",
+        "type": "text-image",
+        "data": {
+          "heading": "Tissue Biopsy Analysis",
+          "body": "We perform comprehensive testing to detect and characterize benign and malignant tissue and preserve a wide range of conditions. Results are reviewed by our experienced pathology team.",
+          "image": "assets/biopsy.jpg",
+          "imageAlt": "Tissue biopsy analysis",
+          "imagePosition": "left",
+          "bullets": [],
+          "ctaText": "",
+          "ctaHref": ""
+        }
+      },
+      {
+        "id": "svc_006",
+        "type": "cta-band",
+        "data": {
+          "heading": "Questions about a test?",
+          "body": "Our team is happy to walk you through what to expect before, during, and after your visit.",
+          "background": "navy",
+          "cta1Text": "Contact us",
+          "cta1Href": "Contact.html",
+          "cta2Text": "View locations",
+          "cta2Href": "Locations.html"
+        }
+      }
+    ]
+  },
+  "locations": {
+    "title": "Locations",
+    "blocks": [
+      {
+        "id": "loc_001",
+        "type": "section-header",
+        "data": {
+          "eyebrow": "Find us",
+          "heading": "Four Convenient Locations",
+          "subheading": "Walk in during open hours — no appointment needed at any location.",
+          "alignment": "center"
+        }
+      },
+      {
+        "id": "loc_002",
+        "type": "locations",
+        "data": {
+          "heading": "",
+          "items": [
+            { "id": "main",      "name": "Main Lab",     "address": "1311 1st Avenue SE",   "city": "Cedar Rapids, IA 52402", "weekday": "Mon–Fri: 6am–6pm", "sat": "Sat: 8am–noon", "sun": "Sun: Closed", "phone1": "319.555.1411", "phone2": "1.800.728.7203" },
+            { "id": "czech",     "name": "Czech Square", "address": "84 16th Avenue SW",    "city": "Cedar Rapids, IA 52404", "weekday": "Mon–Fri: 7am–5pm", "sat": "Sat: 8am–noon", "sun": "Sun: Closed", "phone1": "319.555.2102", "phone2": "1.800.728.7203" },
+            { "id": "southwest", "name": "Southwest",    "address": "2421 Edgewood Rd SW",  "city": "Cedar Rapids, IA 52404", "weekday": "Mon–Fri: 6am–6pm", "sat": "Sat: 8am–noon", "sun": "Sun: Closed", "phone1": "319.555.3344", "phone2": "1.800.728.7203" },
+            { "id": "marion",    "name": "Marion",       "address": "2300 Blairs Ferry Rd", "city": "Marion, IA 52302",       "weekday": "Mon–Fri: 7am–5pm", "sat": "Sat: Closed",   "sun": "Sun: Closed", "phone1": "319.555.7788", "phone2": "1.800.728.7203" }
+          ]
+        }
+      }
+    ]
+  },
+  "faq": {
+    "title": "FAQ",
+    "blocks": [
+      {
+        "id": "faq_001",
+        "type": "section-header",
+        "data": {
+          "eyebrow": "Got questions?",
+          "heading": "Frequently Asked Questions",
+          "subheading": "Everything you need to know before your visit.",
+          "alignment": "center"
+        }
+      },
+      {
+        "id": "faq_002",
+        "type": "faq-accordion",
+        "data": {
+          "items": [
+            { "question": "Do I need an appointment?", "answer": "No appointment is needed for blood draws at any of our four locations. Simply walk in during open hours and our team will take care of you." },
+            { "question": "Do I need to fast before my blood draw?", "answer": "It depends on the test. Common panels like lipids and glucose require 8–12 hours of fasting. Your provider's order will specify if fasting is required. When in doubt, call ahead and we'll check for you." },
+            { "question": "Can I drink water before my test?", "answer": "Yes — plain water is always allowed and actually encouraged. Staying hydrated makes veins easier to access and your draw more comfortable." },
+            { "question": "How long does it take?", "answer": "Most patients are in and out in under 20 minutes. The draw itself typically takes 5 minutes or less." },
+            { "question": "How much does it cost without insurance?", "answer": "We publish flat self-pay rates for the most common panels. A basic metabolic panel is $32, a lipid panel is $36, and a CBC is $24. Ask the front desk for a full price list." },
+            { "question": "How long do results take?", "answer": "Routine panels are typically available same day or within 24 hours. Specialty tests and cultures may take 2–7 days depending on the test." },
+            { "question": "Do you accept HSA and FSA cards?", "answer": "Yes, we accept HSA and FSA cards at all locations." }
+          ]
+        }
+      },
+      {
+        "id": "faq_003",
+        "type": "cta-band",
+        "data": {
+          "heading": "Still have questions?",
+          "body": "Our team is happy to help. Call any location directly or send us a message.",
+          "background": "navy",
+          "cta1Text": "Contact us",
+          "cta1Href": "Contact.html",
+          "cta2Text": "Find a location",
+          "cta2Href": "Locations.html"
+        }
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "blocks": [
+      {
+        "id": "con_001",
+        "type": "section-header",
+        "data": {
+          "eyebrow": "Get in touch",
+          "heading": "Contact Weland Labs",
+          "subheading": "We're here to help. Reach out by phone, email, or the form below.",
+          "alignment": "center"
+        }
+      },
+      {
+        "id": "con_002",
+        "type": "form",
+        "data": {
+          "heading": "Send us a message",
+          "submitText": "Send Message",
+          "successMessage": "Thank you — we'll be in touch shortly.",
+          "fields": [
+            { "id": "f1", "type": "text",     "label": "Full Name",     "placeholder": "Jane Smith",              "required": true },
+            { "id": "f2", "type": "email",    "label": "Email Address", "placeholder": "jane@example.com",        "required": true },
+            { "id": "f3", "type": "phone",    "label": "Phone Number",  "placeholder": "319.555.0000",            "required": false },
+            { "id": "f4", "type": "select",   "label": "Location",      "options": ["Main Lab","Czech Square","Southwest","Marion","General Inquiry"], "required": false },
+            { "id": "f5", "type": "textarea", "label": "Message",       "placeholder": "How can we help you?",    "required": true }
+          ]
+        }
+      }
+    ]
+  },
+  "blog": {
+    "title": "Blog",
+    "blocks": [
+      {
+        "id": "blg_001",
+        "type": "section-header",
+        "data": {
+          "eyebrow": "Latest from Weland Labs",
+          "heading": "Blog",
+          "subheading": "Lab tips, health insights, and patient guides from our clinical team.",
+          "alignment": "center"
+        }
+      },
+      {
+        "id": "blg_002",
+        "type": "blog-grid",
+        "data": {
+          "heading": "",
+          "viewAllText": "",
+          "viewAllHref": "",
+          "postCount": 10
+        }
+      }
+    ]
+  }
+}
