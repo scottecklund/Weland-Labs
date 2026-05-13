@@ -1,0 +1,41 @@
+{
+  "name": "Weland Labs",
+  "tagline": "Precision Testing. Personal Care.",
+  "logo": "",
+  "favicon": "",
+  "phone": "1.800.728.7203",
+  "email": "info@welandlabs.com",
+  "website": "https://weland.devlink.info",
+  "address": {
+    "street": "1311 1st Avenue SE",
+    "city": "Cedar Rapids",
+    "state": "IA",
+    "zip": "52402",
+    "country": "US"
+  },
+  "hours": {
+    "weekday": "Mon–Fri: 6am–6pm",
+    "saturday": "Sat: 8am–noon",
+    "sunday": "Closed"
+  },
+  "social": {
+    "facebook": "",
+    "twitter": "",
+    "linkedin": "",
+    "instagram": "",
+    "youtube": ""
+  },
+  "maps": {
+    "googleMapsEmbed": "",
+    "googleMyBusinessUrl": ""
+  },
+  "colors": {
+    "primary": "#052942",
+    "accent": "#45BBEC",
+    "green": "#80C241"
+  },
+  "github": {
+    "repo": "scottecklund/weland-labs",
+    "branch": "main"
+  }
+}
